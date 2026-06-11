@@ -6,423 +6,327 @@
 <title>Dashboard Operativo — Imprenta Unimetro</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-  /* ── Reset & base ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #ffffff;
-    --bg2: #f5f4f0;
-    --bg3: #eceae3;
-    --text: #1a1a18;
-    --text2: #6b6a65;
-    --text3: #9c9a93;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --info-bg: #e6f1fb; --info-txt: #0c447c;
-    --success-bg: #eaf3de; --success-txt: #27500a;
-    --warn-bg: #faeeda; --warn-txt: #633806;
-    --danger-bg: #fcebeb; --danger-txt: #a32d2d;
-    --partial-bg: #fbeaf0; --partial-txt: #72243e;
-    --rad: 8px; --rad-lg: 12px;
-    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1e1e1c; --bg2: #2a2a27; --bg3: #343431;
-      --text: #e8e6de; --text2: #a8a69f; --text3: #6e6c67;
-      --border: rgba(255,255,255,0.10); --border2: rgba(255,255,255,0.20);
-      --info-bg: #042c53; --info-txt: #b5d4f4;
-      --success-bg: #173404; --success-txt: #c0dd97;
-      --warn-bg: #412402; --warn-txt: #fac775;
-      --danger-bg: #501313; --danger-txt: #f09595;
-      --partial-bg: #4b1528; --partial-txt: #f4c0d1;
-    }
-  }
-  body { font-family: var(--font); background: var(--bg3); color: var(--text); font-size: 14px; min-height: 100vh; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f5f4f0;--bg3:#eceae3;
+  --text:#1a1a18;--text2:#6b6a65;--text3:#9c9a93;
+  --border:rgba(0,0,0,.12);--border2:rgba(0,0,0,.22);
+  --info-bg:#e6f1fb;--info-txt:#0c447c;
+  --ok-bg:#eaf3de;--ok-txt:#27500a;
+  --warn-bg:#faeeda;--warn-txt:#633806;
+  --danger-bg:#fcebeb;--danger-txt:#a32d2d;
+  --partial-bg:#fbeaf0;--partial-txt:#72243e;
+  --rad:8px;--rad-lg:12px;
+  --font:'Segoe UI',system-ui,-apple-system,sans-serif
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#343431;
+  --text:#e8e6de;--text2:#a8a69f;--text3:#6e6c67;
+  --border:rgba(255,255,255,.10);--border2:rgba(255,255,255,.20);
+  --info-bg:#042c53;--info-txt:#b5d4f4;
+  --ok-bg:#173404;--ok-txt:#c0dd97;
+  --warn-bg:#412402;--warn-txt:#fac775;
+  --danger-bg:#501313;--danger-txt:#f09595;
+  --partial-bg:#4b1528;--partial-txt:#f4c0d1
+}}
+body{font-family:var(--font);background:var(--bg3);color:var(--text);font-size:14px;min-height:100vh}
 
-  /* ── Header ── */
-  .top-bar {
-    background: var(--bg);
-    border-bottom: 0.5px solid var(--border);
-    padding: 0 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 54px; position: sticky; top: 0; z-index: 100;
-  }
-  .top-bar-left { display: flex; align-items: center; gap: 10px; }
-  .logo-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--info-bg); display: flex; align-items: center; justify-content: center; color: var(--info-txt); font-size: 17px; }
-  .top-title { font-size: 15px; font-weight: 600; color: var(--text); }
-  .top-sub { font-size: 11px; color: var(--text2); }
-  .top-bar-right { display: flex; align-items: center; gap: 8px; }
-  .ver-badge { font-size: 10px; padding: 2px 8px; border-radius: 99px; background: var(--info-bg); color: var(--info-txt); font-weight: 600; }
-  .last-update { font-size: 10px; color: var(--text3); }
+/* TOPBAR */
+.topbar{background:var(--bg);border-bottom:.5px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100}
+.tbl{display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--info-bg);display:flex;align-items:center;justify-content:center;color:var(--info-txt);font-size:18px}
+.tb-title{font-size:15px;font-weight:600;color:var(--text)}
+.tb-sub{font-size:11px;color:var(--text2)}
+.tbr{display:flex;align-items:center;gap:8px}
+.ver{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--info-bg);color:var(--info-txt);font-weight:600}
+.upd{font-size:10px;color:var(--text3)}
 
-  /* ── Layout ── */
-  .main { max-width: 1400px; margin: 0 auto; padding: 16px 20px 40px; }
+/* MAIN */
+.main{max-width:1440px;margin:0 auto;padding:14px 18px 48px}
 
-  /* ── KPI Row ── */
-  .kpi-row { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; margin-bottom: 14px; }
-  .kpi { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--rad-lg); padding: 10px 8px; text-align: center; }
-  .kpi-val { font-size: 26px; font-weight: 600; line-height: 1.1; color: var(--text); }
-  .kpi-lbl { font-size: 10px; color: var(--text2); margin-top: 3px; line-height: 1.3; }
-  .kpi.c-green .kpi-val { color: var(--success-txt); }
-  .kpi.c-warn .kpi-val { color: var(--warn-txt); }
-  .kpi.c-red .kpi-val { color: var(--danger-txt); }
-  .kpi.c-blue .kpi-val { color: var(--info-txt); }
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin-bottom:12px}
+.kpi{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rad-lg);padding:9px 6px;text-align:center}
+.kpi-v{font-size:22px;font-weight:600;line-height:1.1;color:var(--text)}
+.kpi-l{font-size:10px;color:var(--text2);margin-top:3px;line-height:1.3}
+.kpi.cg .kpi-v{color:var(--ok-txt)}.kpi.cw .kpi-v{color:var(--warn-txt)}.kpi.cr .kpi-v{color:var(--danger-txt)}.kpi.cb .kpi-v{color:var(--info-txt)}
 
-  /* ── Toolbar ── */
-  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--rad-lg); padding: 10px 14px; }
-  .toolbar-label { font-size: 11px; color: var(--text3); font-weight: 500; }
-  .filter-btn { font-size: 11px; padding: 4px 11px; border-radius: 99px; border: 0.5px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; transition: all .15s; font-family: var(--font); }
-  .filter-btn:hover { background: var(--bg2); }
-  .filter-btn.active { background: var(--info-bg); color: var(--info-txt); border-color: transparent; font-weight: 600; }
-  .toolbar-sep { width: 1px; height: 18px; background: var(--border); }
-  .search-wrap { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-  .search-input { font-size: 12px; padding: 4px 10px; border-radius: 99px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text); font-family: var(--font); width: 180px; outline: none; transition: border-color .15s; }
-  .search-input:focus { border-color: var(--info-txt); }
+/* TOOLBAR */
+.toolbar{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;background:var(--bg);border:.5px solid var(--border);border-radius:var(--rad-lg);padding:9px 13px}
+.tlbl{font-size:10px;color:var(--text3);font-weight:500}
+.fb{font-size:11px;padding:3px 10px;border-radius:99px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:var(--font)}
+.fb:hover{background:var(--bg2)}.fb.on{background:var(--info-bg);color:var(--info-txt);border-color:transparent;font-weight:600}
+.tsep{width:1px;height:16px;background:var(--border)}
+.srch{display:flex;align-items:center;gap:6px;margin-left:auto}
+.si{font-size:12px;padding:4px 10px;border-radius:99px;border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);width:175px;outline:none;transition:border-color .15s}
+.si:focus{border-color:var(--info-txt)}
 
-  /* ── Legend ── */
-  .legend { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; padding: 0 2px; }
-  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
-  .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+/* LEGEND */
+.legend{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;padding:0 2px}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)}
+.ld{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 
-  /* ── Pipeline ── */
-  .pipeline { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 6px; align-items: start; }
-  .silo { border: 0.5px solid var(--border); border-radius: var(--rad-lg); overflow: hidden; background: var(--bg); }
-  .silo-head { padding: 8px 9px; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; border-bottom: 0.5px solid var(--border); gap: 4px; }
-  .silo-head i { font-size: 13px; }
-  .silo-head .badge { font-size: 10px; font-weight: 600; border-radius: 99px; padding: 1px 7px; min-width: 20px; text-align: center; }
-  .silo-body { padding: 6px; display: flex; flex-direction: column; gap: 5px; min-height: 60px; }
-  .silo-empty { font-size: 10px; color: var(--text3); text-align: center; padding: 10px 4px; }
+/* PIPELINE */
+.pipeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;align-items:start}
+.silo{border:.5px solid var(--border);border-radius:var(--rad-lg);overflow:hidden;background:var(--bg)}
+.sh{padding:7px 9px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border);gap:4px}
+.sh i{font-size:13px}
+.badge{font-size:10px;font-weight:600;border-radius:99px;padding:1px 7px;min-width:18px;text-align:center}
+.sb{padding:5px;display:flex;flex-direction:column;gap:5px;min-height:56px}
+.empty{font-size:10px;color:var(--text3);text-align:center;padding:10px 4px}
 
-  /* Silo colors */
-  .silo-solicitud .silo-head { background: #e6f1fb; color: #0c447c; } .silo-solicitud .badge { background: #b5d4f4; color: #0c447c; }
-  .silo-diseno .silo-head { background: #eeedfe; color: #3c3489; } .silo-diseno .badge { background: #cecbf6; color: #3c3489; }
-  .silo-compras .silo-head { background: #faeeda; color: #633806; } .silo-compras .badge { background: #fac775; color: #633806; }
-  .silo-preprensa .silo-head { background: #fbeaf0; color: #72243e; } .silo-preprensa .badge { background: #f4c0d1; color: #72243e; }
-  .silo-produccion .silo-head { background: #eaf3de; color: #27500a; } .silo-produccion .badge { background: #c0dd97; color: #27500a; }
-  .silo-calidad .silo-head { background: #e1f5ee; color: #085041; } .silo-calidad .badge { background: #9fe1cb; color: #085041; }
-  .silo-entrega .silo-head { background: #f1efe8; color: #444441; } .silo-entrega .badge { background: #d3d1c7; color: #444441; }
-  @media (prefers-color-scheme: dark) {
-    .silo-solicitud .silo-head{background:#042c53;color:#b5d4f4}.silo-solicitud .badge{background:#0c447c;color:#b5d4f4}
-    .silo-diseno .silo-head{background:#26215c;color:#cecbf6}.silo-diseno .badge{background:#3c3489;color:#cecbf6}
-    .silo-compras .silo-head{background:#412402;color:#fac775}.silo-compras .badge{background:#633806;color:#fac775}
-    .silo-preprensa .silo-head{background:#4b1528;color:#f4c0d1}.silo-preprensa .badge{background:#72243e;color:#f4c0d1}
-    .silo-produccion .silo-head{background:#173404;color:#c0dd97}.silo-produccion .badge{background:#27500a;color:#c0dd97}
-    .silo-calidad .silo-head{background:#04342c;color:#9fe1cb}.silo-calidad .badge{background:#085041;color:#9fe1cb}
-    .silo-entrega .silo-head{background:#2c2c2a;color:#d3d1c7}.silo-entrega .badge{background:#444441;color:#d3d1c7}
-  }
+/* SILO COLORS */
+.s0 .sh{background:#e6f1fb;color:#0c447c}.s0 .badge{background:#b5d4f4;color:#0c447c}
+.s1 .sh{background:#eeedfe;color:#3c3489}.s1 .badge{background:#cecbf6;color:#3c3489}
+.s2 .sh{background:#faeeda;color:#633806}.s2 .badge{background:#fac775;color:#633806}
+.s3 .sh{background:#fbeaf0;color:#72243e}.s3 .badge{background:#f4c0d1;color:#72243e}
+.s4 .sh{background:#eaf3de;color:#27500a}.s4 .badge{background:#c0dd97;color:#27500a}
+.s5 .sh{background:#e1f5ee;color:#085041}.s5 .badge{background:#9fe1cb;color:#085041}
+.s6 .sh{background:#f1efe8;color:#444441}.s6 .badge{background:#d3d1c7;color:#444441}
+@media(prefers-color-scheme:dark){
+  .s0 .sh{background:#042c53;color:#b5d4f4}.s0 .badge{background:#0c447c;color:#b5d4f4}
+  .s1 .sh{background:#26215c;color:#cecbf6}.s1 .badge{background:#3c3489;color:#cecbf6}
+  .s2 .sh{background:#412402;color:#fac775}.s2 .badge{background:#633806;color:#fac775}
+  .s3 .sh{background:#4b1528;color:#f4c0d1}.s3 .badge{background:#72243e;color:#f4c0d1}
+  .s4 .sh{background:#173404;color:#c0dd97}.s4 .badge{background:#27500a;color:#c0dd97}
+  .s5 .sh{background:#04342c;color:#9fe1cb}.s5 .badge{background:#085041;color:#9fe1cb}
+  .s6 .sh{background:#2c2c2a;color:#d3d1c7}.s6 .badge{background:#444441;color:#d3d1c7}
+}
 
-  /* ── Cards ── */
-  .card { border: 0.5px solid var(--border); border-radius: var(--rad); padding: 7px 8px; cursor: pointer; transition: background .15s, box-shadow .15s; position: relative; background: var(--bg); }
-  .card:hover { background: var(--bg2); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-  .card.has-alert { padding-left: 12px; }
-  .alert-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 4px 0 0 4px; }
-  .alert-red-strip { background: var(--danger-txt); }
-  .alert-yellow-strip { background: var(--warn-txt); }
-  .card-ot { font-size: 9px; font-weight: 600; color: var(--text3); margin-bottom: 1px; }
-  .card-name { font-size: 10px; font-weight: 600; color: var(--text); line-height: 1.3; }
-  .card-dep { font-size: 9px; color: var(--text3); margin-top: 2px; }
-  .card-meta { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 4px; }
-  .pill { font-size: 8px; padding: 1px 5px; border-radius: 99px; white-space: nowrap; font-weight: 600; }
-  .pill-blue { background: var(--info-bg); color: var(--info-txt); }
-  .pill-green { background: var(--success-bg); color: var(--success-txt); }
-  .pill-warn { background: var(--warn-bg); color: var(--warn-txt); }
-  .pill-gray { background: var(--bg2); color: var(--text2); }
-  .pill-red { background: var(--danger-bg); color: var(--danger-txt); }
-  .pill-partial { background: var(--partial-bg); color: var(--partial-txt); }
-  .progress-bar { height: 3px; border-radius: 2px; background: var(--border); margin-top: 5px; }
-  .progress-fill { height: 3px; border-radius: 2px; }
+/* CARDS */
+.card{border:.5px solid var(--border);border-radius:var(--rad);padding:6px 8px;cursor:pointer;transition:background .15s,box-shadow .15s;position:relative;background:var(--bg)}
+.card:hover{background:var(--bg2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card.ha{padding-left:11px}
+.astrip{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:4px 0 0 4px}
+.ar{background:var(--danger-txt)}.ay{background:var(--warn-txt)}
+.cot{font-size:9px;font-weight:600;color:var(--text3);margin-bottom:1px}
+.cname{font-size:10px;font-weight:600;color:var(--text);line-height:1.3}
+.cdep{font-size:9px;color:var(--text3);margin-top:1px}
+.cmeta{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.pill{font-size:8px;padding:1px 5px;border-radius:99px;white-space:nowrap;font-weight:600}
+.pb{background:var(--info-bg);color:var(--info-txt)}
+.pg{background:var(--ok-bg);color:var(--ok-txt)}
+.pw{background:var(--warn-bg);color:var(--warn-txt)}
+.pgr{background:var(--bg2);color:var(--text2)}
+.pr{background:var(--danger-bg);color:var(--danger-txt)}
+.pp{background:var(--partial-bg);color:var(--partial-txt)}
+.pbar{height:3px;border-radius:2px;background:var(--border);margin-top:5px}
+.pfill{height:3px;border-radius:2px}
 
-  /* ── Modal ── */
-  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
-  .overlay.open { display: flex; }
-  .modal { background: var(--bg); border: 0.5px solid var(--border2); border-radius: var(--rad-lg); padding: 20px 22px; width: 100%; max-width: 480px; position: relative; margin: auto; }
-  .modal-close { position: absolute; top: 12px; right: 12px; cursor: pointer; color: var(--text2); font-size: 18px; background: none; border: none; line-height: 1; padding: 2px; }
-  .modal-close:hover { color: var(--text); }
-  .modal-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 2px; padding-right: 24px; }
-  .modal-ot { font-size: 11px; color: var(--text2); margin-bottom: 12px; }
-  .sect { margin-bottom: 12px; }
-  .sect-label { font-size: 9px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px; padding-bottom: 3px; border-bottom: 0.5px solid var(--border); }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .field { font-size: 11px; color: var(--text2); padding: 2px 0; }
-  .field span { color: var(--text); font-weight: 600; }
-  .alert-box { border-radius: var(--rad); padding: 8px 10px; font-size: 11px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.4; }
-  .alert-red-box { background: var(--danger-bg); color: var(--danger-txt); }
-  .alert-yellow-box { background: var(--warn-bg); color: var(--warn-txt); }
-  .pipeline-track { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 5px; }
-  .pt-step { font-size: 9px; padding: 2px 8px; border-radius: 99px; border: 0.5px solid var(--border); color: var(--text3); }
-  .pt-step.active { background: var(--info-bg); color: var(--info-txt); border-color: transparent; font-weight: 600; }
-  .pt-step.done { background: var(--success-bg); color: var(--success-txt); border-color: transparent; }
-  .entrega-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 5px; }
-  .entrega-table th { font-size: 9px; font-weight: 600; color: var(--text3); text-align: left; padding: 3px 4px; border-bottom: 0.5px solid var(--border); }
-  .entrega-table td { padding: 4px 4px; color: var(--text2); border-bottom: 0.5px solid var(--border); }
-  .entrega-table td:last-child { color: var(--text); font-weight: 600; }
-  .entrega-summary { display: flex; gap: 14px; margin-top: 7px; font-size: 11px; }
-  .modal-obs { font-size: 11px; color: var(--text2); line-height: 1.5; }
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-start;justify-content:center;padding:32px 16px;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:var(--bg);border:.5px solid var(--border2);border-radius:var(--rad-lg);padding:18px 20px;width:100%;max-width:480px;position:relative;margin:auto}
+.mclose{position:absolute;top:11px;right:11px;cursor:pointer;color:var(--text2);font-size:17px;background:none;border:none;line-height:1;padding:2px}
+.mclose:hover{color:var(--text)}
+.mtitle{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;padding-right:22px}
+.mot{font-size:10px;color:var(--text2);margin-bottom:10px}
+.sect{margin-bottom:10px}
+.slbl{font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;padding-bottom:2px;border-bottom:.5px solid var(--border)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.field{font-size:11px;color:var(--text2);padding:2px 0}
+.field span{color:var(--text);font-weight:600}
+.abox{border-radius:var(--rad);padding:7px 9px;font-size:11px;margin-bottom:8px;display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.aboxr{background:var(--danger-bg);color:var(--danger-txt)}
+.aboxy{background:var(--warn-bg);color:var(--warn-txt)}
+.pt{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.pts{font-size:9px;padding:2px 7px;border-radius:99px;border:.5px solid var(--border);color:var(--text3)}
+.pts.act{background:var(--info-bg);color:var(--info-txt);border-color:transparent;font-weight:600}
+.pts.dn{background:var(--ok-bg);color:var(--ok-txt);border-color:transparent}
+.etbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}
+.etbl th{font-size:9px;font-weight:600;color:var(--text3);text-align:left;padding:2px 4px;border-bottom:.5px solid var(--border)}
+.etbl td{padding:3px 4px;color:var(--text2);border-bottom:.5px solid var(--border)}
+.obs{font-size:11px;color:var(--text2);line-height:1.5}
 
-  /* ── Footer ── */
-  .footer { text-align: center; font-size: 10px; color: var(--text3); margin-top: 28px; padding-top: 14px; border-top: 0.5px solid var(--border); }
+/* FOOTER */
+.footer{text-align:center;font-size:10px;color:var(--text3);margin-top:24px;padding-top:12px;border-top:.5px solid var(--border)}
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .kpi-row { grid-template-columns: repeat(4, 1fr); }
-    .pipeline { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-    .pipeline { grid-template-columns: 1fr 1fr; }
-    .top-sub { display: none; }
-  }
+/* RESPONSIVE */
+@media(max-width:1100px){.pipeline{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.kpi-row{grid-template-columns:repeat(4,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.tb-sub{display:none}}
+@media(max-width:480px){.kpi-row{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<header class="top-bar">
-  <div class="top-bar-left">
-    <div class="logo-mark"><i class="ti ti-printer"></i></div>
+<header class="topbar">
+  <div class="tbl">
+    <div class="logo"><i class="ti ti-printer"></i></div>
     <div>
-      <div class="top-title">Imprenta Unimetro</div>
-      <div class="top-sub">Dashboard Operativo · OT Maestra v1.1</div>
+      <div class="tb-title">Imprenta Unimetro</div>
+      <div class="tb-sub">Dashboard Operativo · OT Maestra v1.1 · Jun 2026</div>
     </div>
   </div>
-  <div class="top-bar-right">
-    <span class="last-update" id="last-update"></span>
-    <span class="ver-badge">v1.1</span>
+  <div class="tbr">
+    <span class="upd" id="upd"></span>
+    <span class="ver">v1.1</span>
   </div>
 </header>
 
 <main class="main">
 
-  <!-- KPIs -->
-  <div class="kpi-row" id="kpi-row">
-    <div class="kpi"><div class="kpi-val" id="k-total">9</div><div class="kpi-lbl">Total OTs</div></div>
-    <div class="kpi c-green"><div class="kpi-val" id="k-cerradas">1</div><div class="kpi-lbl">Cerradas</div></div>
-    <div class="kpi c-blue"><div class="kpi-val" id="k-proceso">8</div><div class="kpi-lbl">En proceso</div></div>
-    <div class="kpi c-warn"><div class="kpi-val" id="k-espera">2</div><div class="kpi-lbl">En espera 🟡</div></div>
-    <div class="kpi c-red"><div class="kpi-val" id="k-bloq">1</div><div class="kpi-lbl">Bloqueadas 🔴</div></div>
-    <div class="kpi c-green"><div class="kpi-val" id="k-sla">1</div><div class="kpi-lbl">SLA cumplido</div></div>
-    <div class="kpi"><div class="kpi-val" id="k-uds">17.250</div><div class="kpi-lbl">Unidades en OT</div></div>
+  <div class="kpi-row">
+    <div class="kpi cb"><div class="kpi-v" id="k0">12</div><div class="kpi-l">Total OTs</div></div>
+    <div class="kpi cg"><div class="kpi-v" id="k1">2</div><div class="kpi-l">Cerradas ✓</div></div>
+    <div class="kpi cb"><div class="kpi-v" id="k2">10</div><div class="kpi-l">En proceso</div></div>
+    <div class="kpi cw"><div class="kpi-v" id="k3">2</div><div class="kpi-l">En espera 🟡</div></div>
+    <div class="kpi cr"><div class="kpi-v" id="k4">1</div><div class="kpi-l">Bloqueadas 🔴</div></div>
+    <div class="kpi cg"><div class="kpi-v" id="k5">2</div><div class="kpi-l">SLA cumplido</div></div>
+    <div class="kpi"><div class="kpi-v" id="k6">27.550</div><div class="kpi-l">Unidades en OT</div></div>
+    <div class="kpi cw"><div class="kpi-v" id="k7">1</div><div class="kpi-l">Parciales</div></div>
   </div>
 
-  <!-- TOOLBAR -->
   <div class="toolbar">
-    <span class="toolbar-label">Área:</span>
-    <button class="filter-btn active" onclick="setFilter('all',this)">Todas</button>
-    <button class="filter-btn" onclick="setFilter('Vicerrectoria',this)">Vicerrectoría</button>
-    <button class="filter-btn" onclick="setFilter('Biblioteca',this)">Biblioteca</button>
-    <button class="filter-btn" onclick="setFilter('Comunicaciones',this)">Comunicaciones</button>
-    <button class="filter-btn" onclick="setFilter('Administrativa',this)">Administrativa</button>
-    <div class="toolbar-sep"></div>
-    <span class="toolbar-label">Ver:</span>
-    <button class="filter-btn" onclick="setFilter('alerta',this)">⚠ Con alerta</button>
-    <button class="filter-btn" onclick="setFilter('parcial',this)">Parciales</button>
-    <div class="search-wrap">
-      <i class="ti ti-search" style="color:var(--text3);font-size:14px"></i>
-      <input class="search-input" type="text" placeholder="Buscar OT o trabajo…" id="search-input" oninput="onSearch(this.value)">
+    <span class="tlbl">Área:</span>
+    <button class="fb on" onclick="fil('all',this)">Todas</button>
+    <button class="fb" onclick="fil('Rectoria',this)">Rectoría</button>
+    <button class="fb" onclick="fil('Vicerrectoria',this)">Vicerrectoría</button>
+    <button class="fb" onclick="fil('Biblioteca',this)">Biblioteca</button>
+    <button class="fb" onclick="fil('Administrativa',this)">Administrativa</button>
+    <div class="tsep"></div>
+    <span class="tlbl">Ver:</span>
+    <button class="fb" onclick="fil('alerta',this)">⚠ Con alerta</button>
+    <button class="fb" onclick="fil('cerrada',this)">✓ Cerradas</button>
+    <div class="srch">
+      <i class="ti ti-search" style="color:var(--text3);font-size:13px"></i>
+      <input class="si" type="text" placeholder="Buscar OT…" oninput="search(this.value)">
     </div>
   </div>
 
-  <!-- LEGEND -->
   <div class="legend">
     <span style="font-size:10px;font-weight:600;color:var(--text2)">Alertas:</span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--danger-txt)"></span>🔴 Bloqueada — sin insumos, sin ruta definida</span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--warn-txt)"></span>🟡 En espera — insumos en trámite / aprobación pendiente</span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--success-txt)"></span>Sin alerta — avanzando normalmente</span>
-    <span class="leg-item"><span class="pill pill-partial" style="font-size:9px">parcial</span>Entrega parcial activa</span>
+    <span class="li"><span class="ld" style="background:var(--danger-txt)"></span>🔴 Bloqueada — sin insumos, sin ruta</span>
+    <span class="li"><span class="ld" style="background:var(--warn-txt)"></span>🟡 En espera — aprobación/insumo pendiente</span>
+    <span class="li"><span class="ld" style="background:var(--ok-txt)"></span>Sin alerta — avanzando</span>
+    <span class="li"><span class="pill pp" style="font-size:9px">parcial</span>Entrega parcial</span>
   </div>
 
-  <!-- PIPELINE -->
   <div class="pipeline">
-    <div class="silo silo-solicitud">
-      <div class="silo-head"><span><i class="ti ti-file-text"></i> Solicitud</span><span class="badge" id="b0">0</span></div>
-      <div class="silo-body" id="silo-0"></div>
-    </div>
-    <div class="silo silo-diseno">
-      <div class="silo-head"><span><i class="ti ti-palette"></i> Diseño</span><span class="badge" id="b1">0</span></div>
-      <div class="silo-body" id="silo-1"></div>
-    </div>
-    <div class="silo silo-compras">
-      <div class="silo-head"><span><i class="ti ti-shopping-cart"></i> Compras</span><span class="badge" id="b2">0</span></div>
-      <div class="silo-body" id="silo-2"></div>
-    </div>
-    <div class="silo silo-preprensa">
-      <div class="silo-head"><span><i class="ti ti-layers"></i> Preprensa</span><span class="badge" id="b3">0</span></div>
-      <div class="silo-body" id="silo-3"></div>
-    </div>
-    <div class="silo silo-produccion">
-      <div class="silo-head"><span><i class="ti ti-settings"></i> Producción</span><span class="badge" id="b4">0</span></div>
-      <div class="silo-body" id="silo-4"></div>
-    </div>
-    <div class="silo silo-calidad">
-      <div class="silo-head"><span><i class="ti ti-clipboard-check"></i> Calidad</span><span class="badge" id="b5">0</span></div>
-      <div class="silo-body" id="silo-5"></div>
-    </div>
-    <div class="silo silo-entrega">
-      <div class="silo-head"><span><i class="ti ti-package"></i> Entrega/KPIs</span><span class="badge" id="b6">0</span></div>
-      <div class="silo-body" id="silo-6"></div>
-    </div>
+    <div class="silo s0"><div class="sh"><span><i class="ti ti-file-text"></i> Solicitud</span><span class="badge" id="b0">0</span></div><div class="sb" id="s0"></div></div>
+    <div class="silo s1"><div class="sh"><span><i class="ti ti-palette"></i> Diseño</span><span class="badge" id="b1">0</span></div><div class="sb" id="s1"></div></div>
+    <div class="silo s2"><div class="sh"><span><i class="ti ti-shopping-cart"></i> Compras</span><span class="badge" id="b2">0</span></div><div class="sb" id="s2"></div></div>
+    <div class="silo s3"><div class="sh"><span><i class="ti ti-layers"></i> Preprensa</span><span class="badge" id="b3">0</span></div><div class="sb" id="s3"></div></div>
+    <div class="silo s4"><div class="sh"><span><i class="ti ti-settings"></i> Producción</span><span class="badge" id="b4">0</span></div><div class="sb" id="s4"></div></div>
+    <div class="silo s5"><div class="sh"><span><i class="ti ti-clipboard-check"></i> Calidad</span><span class="badge" id="b5">0</span></div><div class="sb" id="s5"></div></div>
+    <div class="silo s6"><div class="sh"><span><i class="ti ti-package"></i> Entrega/KPIs</span><span class="badge" id="b6">0</span></div><div class="sb" id="s6"></div></div>
   </div>
 
-  <div class="footer">
-    Imprenta Unimetro · Dashboard Operativo v1.1 · Responsable: Julio Rivera · Solo lectura — datos actualizados por el coordinador de imprenta
-  </div>
+  <div class="footer">Imprenta Unimetro · Dashboard Operativo v1.1 · Responsable: Julio Rivera · Solo lectura — datos actualizados por el coordinador de imprenta</div>
 </main>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
-  <div class="modal" id="modal">
-    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar"><i class="ti ti-x"></i></button>
-    <div id="modal-content"></div>
+<div class="overlay" id="ov" onclick="ovc(event)">
+  <div class="modal">
+    <button class="mclose" onclick="cm()" aria-label="Cerrar"><i class="ti ti-x"></i></button>
+    <div id="mc"></div>
   </div>
 </div>
 
 <script>
-// ── Data ──
-const SILOS = ["Solicitud","Diseño","Compras","Preprensa","Producción","Calidad","Entrega"];
+const SN=["Solicitud","Diseño","Compras","Preprensa","Producción","Calidad","Entrega"];
 
-const OTs = [
-  {ot:"OT-UM-202605-001",nombre:"Miniblocks — pieza promocional",tipo:"MiniBlocks",dep:"Rectoría - Comunicaciones y Mercadeo",sol:"Camilo Robledo",cant:950,fReq:"18 Jun",estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"20×13 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:950,calidadOk:"Sí",sla:"Pendiente",alerta:null,pct:70,obs:"Parar corte y refilo. Sangrado 0.5 cm. Primera entrega parcial realizada.",entregas:[{fecha:"28 May",cant:500,rec:"Camilo Robledo",nota:"Primera entrega parcial"}]},
-  {ot:"OT-UM-202605-002",nombre:"Memos — pieza de mercadeo",tipo:"Memos",dep:"Rectoría - Comunicaciones y Mercadeo",sol:"Camilo Robledo",cant:570,fReq:"18 Jun",estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"9×9 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:562,calidadOk:"Sí",sla:"Pendiente",alerta:null,pct:70,obs:"562 unidades producidas de 570. Pendiente entrega y cierre.",entregas:[]},
-  {ot:"OT-UM-202605-003",nombre:"Agendas primer semestre",tipo:"Agendas",dep:"Vicerrectoria",sol:"Jose Luis Castro Guerra",cant:1500,fReq:"04 Jul",estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color",material:"Bond 75 g",acabado:"Anillado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidadOk:"No",sla:"Pendiente",alerta:"espera",pct:15,obs:"Diseño enviado a Rectoría para aprobación. Plancha y material pendientes de definir.",entregas:[]},
-  {ot:"OT-UM-202605-004",nombre:"Abanicos — promoción UM",tipo:"Abanicos",dep:"Vicerrectoria",sol:"Jose Luis Castro",cant:1500,fReq:"11 Jul",estado:"En espera Compras",silo:2,clienteOk:"No",planchas:"No",formato:"—",tintas:"Dos tintas",material:"Propalcote",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidadOk:"No",sla:"Pendiente",alerta:"bloqueada",pct:8,obs:"Sin diseño, sin plancha, sin material aprobado. OC en proceso pero idea aún sin definir. Requiere decisión de Vicerrectoría.",entregas:[]},
-  {ot:"OT-UM-202605-005",nombre:"Actas de Grado",tipo:"Actas de grado",dep:"Vicerrectoria",sol:"Indira Luz de la Rosa",cant:1000,fReq:"27 Jun",estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Dos tintas",material:"Opalina",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidadOk:"No",sla:"Pendiente",alerta:null,pct:40,obs:"Diseño y plancha existentes. Esperando papel Opalina de Dipaca (cotización gestionada por Julio Rivera).",entregas:[]},
-  {ot:"OT-UM-202604-006",nombre:"Tarjetas de Préstamo Biblioteca",tipo:"Tarjetas Prestamo",dep:"Vicerrectoría - Biblioteca",sol:"Yarima Medrano Nazzer",cant:5000,fReq:"17 Jul",estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"18.5×10.5 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Corte",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidadOk:"No",sla:"Pendiente",alerta:null,pct:45,obs:"Diseño, plancha y material listos. Lista para entrar a producción.",entregas:[]},
-  {ot:"OT-UM-202604-007",nombre:"Bolsillos tarjeta de préstamo",tipo:"Bolsillos",dep:"Vicerrectoría - Biblioteca",sol:"Yarima Medrano Nazzer",cant:2000,fReq:"17 Jul",estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"17×10.5 cm",tintas:"Una tinta",material:"Cartulina",acabado:"Doblado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidadOk:"Sí",sla:"Pendiente",alerta:null,pct:45,obs:"Todo listo. Calidad de muestra aprobada.",entregas:[]},
-  {ot:"OT-UM-202604-008",nombre:"Adhesivos colores — Biblioteca",tipo:"Adhesivos de Colores",dep:"Vicerrectoría - Biblioteca",sol:"Yarima Medrano Nazzer",cant:1300,fReq:"11 May",estado:"Cerrada",silo:6,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Una tinta",material:"Adhesivo",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:1300,calidadOk:"Sí",sla:"Sí",alerta:null,pct:100,obs:"Entregado 11 May por paquetes en Biblioteca. Ciclo total: 34 días. SLA cumplido.",entregas:[{fecha:"11 May",cant:1300,rec:"Yarima Medrano Nazzer",nota:"Entrega total. OT cerrada."}]},
-  {ot:"OT-UM-202605-009",nombre:"Hojas membreteadas — institucional",tipo:"Hojas Membreteadas",dep:"Vicerrectoria - Dirección Administrativa",sol:"Elio Ortiz",cant:5000,fReq:"04 Jul",estado:"Abierta",silo:0,clienteOk:"No",planchas:"No",formato:"28×22 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidadOk:"Sí",sla:"Pendiente",alerta:"espera",pct:5,obs:"Diseño existe pero falta bajar plancha. Requiere compra de planchas antes de producción.",entregas:[]},
+// Excel serial → date string (Colombia)
+function xd(s){if(!s||isNaN(s))return'—';const d=new Date((s-25569)*86400000);return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})}
+
+const OTs=[
+  {ot:"OT-UM-202605-001",nombre:"Miniblocks — pieza promocional",tipo:"MiniBlocks",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:950,fReq:46172,estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"20×13 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:950,calidad:"Sí",sla:"Pendiente",alerta:null,pct:72,obs:"Sangrado 0.5 cm para corte y refilo. Primera entrega parcial realizada 28 May (500 uds).",entregas:[{fecha:"28 May",cant:500,rec:"Camilo Robledo",nota:"Primera entrega parcial"}]},
+  {ot:"OT-UM-202605-002",nombre:"Memos — pieza de mercadeo",tipo:"Memos",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:570,fReq:46172,estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"9×9 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:562,calidad:"Sí",sla:"Pendiente",alerta:null,pct:72,obs:"562 de 570 unidades producidas. Pendiente 8 uds y entrega final.",entregas:[]},
+  {ot:"OT-UM-202605-003",nombre:"Agendas primer semestre",tipo:"Agendas",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Jose Luis Castro Guerra",correo:"vice-rectoria@unimetro.edu.co",cant:1500,fReq:46188,estado:"Diseño",silo:1,clienteOk:"Sí",planchas:"No",formato:"—",tintas:"Full color",material:"Bond 75 g",acabado:"Anillado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"espera",pct:15,obs:"Diseño en Rectoría para aprobación. Material pedido el 20 May. Seguimiento a diseño el 22 May. Sin planchas.",entregas:[]},
+  {ot:"OT-UM-202605-004",nombre:"Abanicos — promoción UM",tipo:"Abanicos",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Jose Luis Castro",correo:"vice-rectoria@unimetro.edu.co",cant:1500,fReq:46195,estado:"Abierta",silo:2,clienteOk:"No",planchas:"No",formato:"—",tintas:"Dos tintas",material:"Propalcote",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"bloqueada",pct:8,obs:"Idea en maduración — sin diseño, sin plancha. OC material en proceso. Requiere decisión de Vicerrectoría para avanzar.",entregas:[]},
+  {ot:"OT-UM-202605-005",nombre:"Actas de Grado",tipo:"Actas de grado",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Indira Luz de la Rosa",correo:"idelarosa@unimetro.edu.co",cant:1000,fReq:46184,estado:"Cerrada",silo:6,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Dos tintas",material:"Opalina",acabado:"Tinta Seguridad + Barniz",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:1250,calidad:"Sí",sla:"Sí",alerta:null,pct:100,obs:"Producidas 1.250 (250 sobre el pedido). Barniz al logo UM. Entregadas el 27 May. Ciclo: 31 días. SLA cumplido.",entregas:[{fecha:"27 May",cant:1250,rec:"Indira Luz de la Rosa",nota:"Entrega total. OT cerrada. 250 uds adicionales incluidas."}]},
+  {ot:"OT-UM-202604-006",nombre:"Tarjetas de Préstamo Biblioteca",tipo:"Tarjetas Prestamo",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:5000,fReq:46198,estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"18.5×10.5 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Corte",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:45,obs:"Diseño, plancha y material listos. Lista para entrar a producción. Demora previa por material — llegó el 4 Mayo.",entregas:[]},
+  {ot:"OT-UM-202604-007",nombre:"Bolsillos tarjeta de préstamo",tipo:"Bolsillos",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:2000,fReq:46198,estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"17×10.5 cm",tintas:"Una tinta",material:"Cartulina",acabado:"Doblado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"Sí",sla:"Pendiente",alerta:null,pct:45,obs:"Diseño, plancha y material listos. Calidad de muestra OK. Material llegó inicios de Mayo.",entregas:[]},
+  {ot:"OT-UM-202604-008",nombre:"Adhesivos colores — Biblioteca",tipo:"Adhesivos de Colores",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:1300,fReq:46155,estado:"Cerrada",silo:6,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Una tinta",material:"Adhesivo",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:1300,calidad:"Sí",sla:"Sí",alerta:null,pct:100,obs:"Entregados el 11 May por paquetes en Biblioteca (Amarillo 500, Verde/Rosado/Gris/Azul 200 c/u). Ciclo: 34 días. SLA cumplido.",entregas:[{fecha:"11 May",cant:1300,rec:"Yarima Medrano Nazzer",nota:"Entrega total. OT cerrada."}]},
+  {ot:"OT-UM-202605-009",nombre:"Hojas membreteadas institucional",tipo:"Hojas Membreteadas",dep:"Vicerrectoria - Dirección Administrativa",dk:"Administrativa",sol:"Elio Ortiz",correo:"eortizg@unimetro.edu.co",cant:5000,fReq:46188,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"28×22 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"Sí",sla:"Pendiente",alerta:"espera",pct:8,obs:"Diseño existe pero falta bajar plancha. Requiere compra de planchas antes de producción. Meta: finales de junio.",entregas:[]},
+  {ot:"OT-UM-202605-010",nombre:"Individuales para bandejas comidas",tipo:"Individuales para bandejas",dep:"Rectoría - Alta consejería",dk:"Rectoria",sol:"Julian Ramirez",correo:"jramirezo@unimetro.edu.co",cant:2500,fReq:46206,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color",material:"Otro",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"espera",pct:8,obs:"Primer diseño en prueba. Rectoría evaluando otro diseño. Número total de ejemplares aún sin definir.",entregas:[]},
+  {ot:"OT-UM-202606-011",nombre:"Volantes Medicina — programas académicos",tipo:"Volantes",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:2000,fReq:46203,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color (4 planchas/volante)",material:"—",acabado:"—",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:10,obs:"Diseño y aprobación en proceso. Policromía completa requiere 4 planchas por volante.",entregas:[]},
+  {ot:"OT-UM-202606-012",nombre:"Volantes Bacteriología / Enfermería / Fisioterapia / Fonoaudiología",tipo:"Volantes",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:4000,fReq:46213,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color",material:"—",acabado:"—",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:10,obs:"4 programas en una plancha (1.000 volantes c/u). Diseño en proceso.",entregas:[]},
 ];
 
-// ── State ──
-let activeFilter = 'all';
-let searchTerm = '';
+let AF='all',ST='';
 
-function depKey(dep) {
-  if (dep.includes("Biblioteca")) return "Biblioteca";
-  if (dep.includes("Comunicaciones") || dep.includes("Rectoría")) return "Comunicaciones";
-  if (dep.includes("Administrativa")) return "Administrativa";
-  return "Vicerrectoria";
-}
-
-function matchesFilter(ot) {
-  if (activeFilter === 'Vicerrectoria' && depKey(ot.dep) !== 'Vicerrectoria') return false;
-  if (activeFilter === 'Biblioteca' && depKey(ot.dep) !== 'Biblioteca') return false;
-  if (activeFilter === 'Comunicaciones' && depKey(ot.dep) !== 'Comunicaciones') return false;
-  if (activeFilter === 'Administrativa' && depKey(ot.dep) !== 'Administrativa') return false;
-  if (activeFilter === 'alerta' && !ot.alerta) return false;
-  if (activeFilter === 'parcial' && !(ot.entregas && ot.entregas.length > 0 && ot.sla !== 'Sí')) return false;
-  if (searchTerm) {
-    const q = searchTerm.toLowerCase();
-    if (!ot.ot.toLowerCase().includes(q) && !ot.nombre.toLowerCase().includes(q) && !ot.tipo.toLowerCase().includes(q) && !ot.dep.toLowerCase().includes(q)) return false;
-  }
+function depMatch(ot,f){
+  if(f==='all') return true;
+  if(f==='Rectoria') return ot.dk==='Rectoria';
+  if(f==='Vicerrectoria') return ot.dk==='Vicerrectoria';
+  if(f==='Biblioteca') return ot.dk==='Biblioteca';
+  if(f==='Administrativa') return ot.dk==='Administrativa';
+  if(f==='alerta') return !!ot.alerta;
+  if(f==='cerrada') return ot.estado==='Cerrada';
   return true;
 }
 
-function pctBg(p) { return p >= 80 ? '#639922' : p >= 40 ? '#ba7517' : '#a32d2d'; }
+function matches(ot){
+  if(!depMatch(ot,AF)) return false;
+  if(ST){const q=ST.toLowerCase();if(!ot.ot.toLowerCase().includes(q)&&!ot.nombre.toLowerCase().includes(q)&&!ot.tipo.toLowerCase().includes(q)&&!ot.dep.toLowerCase().includes(q)) return false;}
+  return true;
+}
 
-function buildPipeline() {
-  for (let i = 0; i < 7; i++) {
-    document.getElementById('silo-' + i).innerHTML = '';
-  }
-  const counts = Array(7).fill(0);
-  OTs.forEach(ot => {
-    if (!matchesFilter(ot)) return;
-    counts[ot.silo]++;
-    const hasAlert = ot.alerta ? 'has-alert' : '';
-    const strip = ot.alerta === 'bloqueada'
-      ? '<div class="alert-strip alert-red-strip"></div>'
-      : ot.alerta === 'espera'
-      ? '<div class="alert-strip alert-yellow-strip"></div>'
-      : '';
-    const alertPill = ot.alerta === 'bloqueada'
-      ? '<span class="pill pill-red">🔴 bloqueada</span>'
-      : ot.alerta === 'espera'
-      ? '<span class="pill pill-warn">🟡 en espera</span>'
-      : '';
-    const slaPill = ot.sla === 'Sí' ? '<span class="pill pill-green">SLA ✓</span>' : '';
-    const partialPill = (ot.entregas && ot.entregas.length > 0 && ot.sla !== 'Sí')
-      ? '<span class="pill pill-partial">parcial</span>' : '';
+function pc(p){return p>=80?'#639922':p>=40?'#ba7517':'#a32d2d'}
 
-    const html = `<div class="card ${hasAlert}" onclick="showModal('${ot.ot}')">
-      ${strip}
-      <div class="card-ot">${ot.ot}</div>
-      <div class="card-name">${ot.nombre}</div>
-      <div class="card-dep">${ot.dep.split(' - ')[0]}</div>
-      <div class="card-meta">
-        <span class="pill pill-gray">${ot.cant.toLocaleString('es-CO')} uds</span>
-        <span class="pill pill-gray">↗ ${ot.fReq}</span>
-        ${alertPill}${slaPill}${partialPill}
-      </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${ot.pct}%;background:${pctBg(ot.pct)}"></div></div>
-    </div>`;
-    document.getElementById('silo-' + ot.silo).insertAdjacentHTML('beforeend', html);
+function build(){
+  for(let i=0;i<7;i++){document.getElementById('s'+i).innerHTML='';document.getElementById('b'+i).textContent='0';}
+  const cnt=Array(7).fill(0);
+  OTs.forEach(ot=>{
+    if(!matches(ot)) return;
+    cnt[ot.silo]++;
+    const ha=ot.alerta?'ha':'';
+    const strip=ot.alerta==='bloqueada'?'<div class="astrip ar"></div>':ot.alerta?'<div class="astrip ay"></div>':'';
+    const ap=ot.alerta==='bloqueada'?'<span class="pill pr">🔴 bloqueada</span>':ot.alerta?'<span class="pill pw">🟡 en espera</span>':'';
+    const sp=ot.sla==='Sí'?'<span class="pill pg">SLA ✓</span>':'';
+    const pp=ot.entregas&&ot.entregas.length>0&&ot.sla!=='Sí'?'<span class="pill pp">parcial</span>':'';
+    document.getElementById('s'+ot.silo).insertAdjacentHTML('beforeend',
+      `<div class="card ${ha}" onclick="sd('${ot.ot}')">${strip}
+        <div class="cot">${ot.ot}</div>
+        <div class="cname">${ot.nombre}</div>
+        <div class="cdep">${ot.dep.split(' - ')[0]}</div>
+        <div class="cmeta"><span class="pill pgr">${ot.cant.toLocaleString('es-CO')} uds</span><span class="pill pgr">↗ ${xd(ot.fReq)}</span>${ap}${sp}${pp}</div>
+        <div class="pbar"><div class="pfill" style="width:${ot.pct}%;background:${pc(ot.pct)}"></div></div>
+      </div>`);
   });
-  for (let i = 0; i < 7; i++) {
-    const el = document.getElementById('b' + i);
-    el.textContent = counts[i];
-    if (counts[i] === 0) {
-      document.getElementById('silo-' + i).innerHTML = '<div class="silo-empty">Sin OTs</div>';
-    }
+  for(let i=0;i<7;i++){
+    document.getElementById('b'+i).textContent=cnt[i];
+    if(cnt[i]===0) document.getElementById('s'+i).innerHTML='<div class="empty">Sin OTs</div>';
   }
 }
 
-function setFilter(dep, btn) {
-  activeFilter = dep;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  buildPipeline();
-}
+function fil(f,btn){AF=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');build();}
+function search(v){ST=v.trim();build();}
 
-function onSearch(val) {
-  searchTerm = val.trim();
-  buildPipeline();
-}
-
-function showModal(otNum) {
-  const ot = OTs.find(o => o.ot === otNum);
-  if (!ot) return;
-
-  const siloTrack = SILOS.map((n, i) => {
-    const cls = i < ot.silo ? 'done' : i === ot.silo ? 'active' : '';
-    return `<span class="pt-step ${cls}">${n}</span>`;
-  }).join('');
-
-  let alertBox = '';
-  if (ot.alerta === 'bloqueada') alertBox = `<div class="alert-box alert-red-box"><i class="ti ti-alert-triangle"></i><div><strong>Bloqueada</strong> — Sin diseño, plancha ni material definido. Requiere decisión ejecutiva antes de avanzar.</div></div>`;
-  if (ot.alerta === 'espera') alertBox = `<div class="alert-box alert-yellow-box"><i class="ti ti-clock"></i><div><strong>En espera</strong> — Insumos en trámite o aprobación pendiente. Ruta definida, sin confirmación aún.</div></div>`;
-
-  let entregasHtml = '';
-  if (ot.entregas && ot.entregas.length > 0) {
-    const rows = ot.entregas.map(e =>
-      `<tr><td>${e.fecha}</td><td>${e.cant.toLocaleString('es-CO')}</td><td>${e.rec}</td><td>${e.nota}</td></tr>`
-    ).join('');
-    const totalEnt = ot.entregas.reduce((s, e) => s + e.cant, 0);
-    const pend = ot.cant - totalEnt;
-    entregasHtml = `<table class="entrega-table"><thead><tr><th>Fecha</th><th>Cant.</th><th>Recibió</th><th>Nota</th></tr></thead><tbody>${rows}</tbody></table>
-      <div class="entrega-summary">
-        <span style="color:var(--text2)">Entregado: <strong style="color:var(--success-txt)">${totalEnt.toLocaleString('es-CO')}</strong></span>
-        <span style="color:var(--text2)">Pendiente: <strong style="color:var(--warn-txt)">${pend.toLocaleString('es-CO')}</strong></span>
-      </div>`;
-  } else {
-    entregasHtml = '<span style="font-size:11px;color:var(--text3)">Sin entregas registradas aún.</span>';
+function sd(id){
+  const ot=OTs.find(o=>o.ot===id);if(!ot) return;
+  const track=SN.map((n,i)=>`<span class="pts ${i<ot.silo?'dn':i===ot.silo?'act':''}">${n}</span>`).join('');
+  const abox=ot.alerta==='bloqueada'
+    ?`<div class="abox aboxr"><i class="ti ti-alert-triangle"></i><div><strong>Bloqueada</strong> — Sin diseño, plancha ni material definido. Requiere decisión ejecutiva.</div></div>`
+    :ot.alerta
+    ?`<div class="abox aboxy"><i class="ti ti-clock"></i><div><strong>En espera</strong> — Insumos en trámite o aprobación pendiente. Ruta definida.</div></div>`:'';
+  let ent='<span style="font-size:11px;color:var(--text3)">Sin entregas registradas.</span>';
+  if(ot.entregas&&ot.entregas.length>0){
+    const rows=ot.entregas.map(e=>`<tr><td>${e.fecha}</td><td>${e.cant.toLocaleString('es-CO')}</td><td>${e.rec}</td><td>${e.nota}</td></tr>`).join('');
+    const tot=ot.entregas.reduce((s,e)=>s+e.cant,0);
+    ent=`<table class="etbl"><thead><tr><th>Fecha</th><th>Cant.</th><th>Recibió</th><th>Nota</th></tr></thead><tbody>${rows}</tbody></table>
+    <div style="display:flex;gap:12px;margin-top:6px;font-size:11px">
+      <span style="color:var(--text2)">Entregado: <strong style="color:var(--ok-txt)">${tot.toLocaleString('es-CO')}</strong></span>
+      <span style="color:var(--text2)">Pendiente: <strong style="color:var(--warn-txt)">${(ot.cant-tot).toLocaleString('es-CO')}</strong></span>
+    </div>`;
   }
-
-  document.getElementById('modal-content').innerHTML = `
-    <div class="modal-title">${ot.nombre}</div>
-    <div class="modal-ot">${ot.ot} · ${ot.estado} · ${ot.cant.toLocaleString('es-CO')} uds · ↗ ${ot.fReq}</div>
-    ${alertBox}
-    <div class="sect"><div class="sect-label">Pipeline</div>
-      <div class="pipeline-track">${siloTrack}</div>
-      <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" style="width:${ot.pct}%;background:${pctBg(ot.pct)}"></div></div>
-      <div style="font-size:10px;color:${pctBg(ot.pct)};margin-top:3px;text-align:right">${ot.pct}% completado</div>
+  document.getElementById('mc').innerHTML=`
+    <div class="mtitle">${ot.nombre}</div>
+    <div class="mot">${ot.ot} · ${ot.estado} · ${ot.cant.toLocaleString('es-CO')} uds · ↗ ${xd(ot.fReq)}</div>
+    ${abox}
+    <div class="sect"><div class="slbl">Pipeline</div>
+      <div class="pt">${track}</div>
+      <div class="pbar" style="margin-top:7px"><div class="pfill" style="width:${ot.pct}%;background:${pc(ot.pct)}"></div></div>
+      <div style="font-size:10px;color:${pc(ot.pct)};margin-top:2px;text-align:right">${ot.pct}% completado</div>
     </div>
-    <div class="sect"><div class="sect-label">Solicitante</div>
-      <div class="row2">
+    <div class="sect"><div class="slbl">Solicitante</div>
+      <div class="r2">
         <div class="field">Área: <span>${ot.dep}</span></div>
         <div class="field">Contacto: <span>${ot.sol}</span></div>
+        <div class="field">Correo: <span style="font-weight:400">${ot.correo}</span></div>
       </div>
     </div>
-    <div class="sect"><div class="sect-label">Especificación técnica</div>
-      <div class="row2">
+    <div class="sect"><div class="slbl">Especificación técnica</div>
+      <div class="r2">
         <div class="field">Tipo: <span>${ot.tipo}</span></div>
         <div class="field">Formato: <span>${ot.formato}</span></div>
         <div class="field">Tintas: <span>${ot.tintas}</span></div>
@@ -430,30 +334,23 @@ function showModal(otNum) {
         <div class="field">Acabado: <span>${ot.acabado}</span></div>
         <div class="field">Máquina: <span>${ot.maquina}</span></div>
         <div class="field">Stock: <span>${ot.stock}</span></div>
-        <div class="field">Aprobación cliente: <span>${ot.clienteOk}</span></div>
+        <div class="field">Cliente aprobó: <span>${ot.clienteOk}</span></div>
         <div class="field">Planchas: <span>${ot.planchas}</span></div>
         <div class="field">Producidas: <span>${ot.cantProd.toLocaleString('es-CO')}</span></div>
-        <div class="field">Calidad OK: <span>${ot.calidadOk}</span></div>
+        <div class="field">Calidad OK: <span>${ot.calidad}</span></div>
         <div class="field">SLA: <span>${ot.sla}</span></div>
       </div>
     </div>
-    <div class="sect"><div class="sect-label">Entregas parciales</div>${entregasHtml}</div>
-    <div class="sect"><div class="sect-label">Observaciones</div><div class="modal-obs">${ot.obs}</div></div>
-  `;
-  document.getElementById('overlay').classList.add('open');
+    <div class="sect"><div class="slbl">Entregas</div>${ent}</div>
+    <div class="sect"><div class="slbl">Observaciones</div><div class="obs">${ot.obs}</div></div>`;
+  document.getElementById('ov').classList.add('open');
 }
+function ovc(e){if(e.target===document.getElementById('ov')) cm();}
+function cm(){document.getElementById('ov').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') cm();});
 
-function handleOverlayClick(e) {
-  if (e.target === document.getElementById('overlay')) closeModal();
-}
-function closeModal() {
-  document.getElementById('overlay').classList.remove('open');
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// ── Init ──
-document.getElementById('last-update').textContent = 'Actualizado: ' + new Date().toLocaleDateString('es-CO', {day:'2-digit',month:'short',year:'numeric'});
-buildPipeline();
+document.getElementById('upd').textContent='Actualizado: '+new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+build();
 </script>
 </body>
 </html>
