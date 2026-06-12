@@ -3,354 +3,746 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Operativo — Imprenta Unimetro</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<title>Dashboard Operativo · Imprenta UM</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#ffffff;--bg2:#f5f4f0;--bg3:#eceae3;
-  --text:#1a1a18;--text2:#6b6a65;--text3:#9c9a93;
-  --border:rgba(0,0,0,.12);--border2:rgba(0,0,0,.22);
-  --info-bg:#e6f1fb;--info-txt:#0c447c;
-  --ok-bg:#eaf3de;--ok-txt:#27500a;
-  --warn-bg:#faeeda;--warn-txt:#633806;
-  --danger-bg:#fcebeb;--danger-txt:#a32d2d;
-  --partial-bg:#fbeaf0;--partial-txt:#72243e;
-  --rad:8px;--rad-lg:12px;
-  --font:'Segoe UI',system-ui,-apple-system,sans-serif
-}
-@media(prefers-color-scheme:dark){:root{
-  --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#343431;
-  --text:#e8e6de;--text2:#a8a69f;--text3:#6e6c67;
-  --border:rgba(255,255,255,.10);--border2:rgba(255,255,255,.20);
-  --info-bg:#042c53;--info-txt:#b5d4f4;
-  --ok-bg:#173404;--ok-txt:#c0dd97;
-  --warn-bg:#412402;--warn-txt:#fac775;
-  --danger-bg:#501313;--danger-txt:#f09595;
-  --partial-bg:#4b1528;--partial-txt:#f4c0d1
-}}
-body{font-family:var(--font);background:var(--bg3);color:var(--text);font-size:14px;min-height:100vh}
+  :root {
+    --ink:     #0f1923;
+    --paper:   #f5f2ec;
+    --rule:    #ddd8cf;
+    --lead:    #1d3557;
+    --lead2:   #274978;
+    --accent:  #c1440e;
+    --gold:    #d4a017;
+    --green:   #2a7a4b;
+    --cyan:    #1a6f8c;
+    --purple:  #5a4a8a;
+    --sand:    #e8e2d6;
+    --white:   #ffffff;
 
-/* TOPBAR */
-.topbar{background:var(--bg);border-bottom:.5px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100}
-.tbl{display:flex;align-items:center;gap:10px}
-.logo{width:34px;height:34px;border-radius:9px;background:var(--info-bg);display:flex;align-items:center;justify-content:center;color:var(--info-txt);font-size:18px}
-.tb-title{font-size:15px;font-weight:600;color:var(--text)}
-.tb-sub{font-size:11px;color:var(--text2)}
-.tbr{display:flex;align-items:center;gap:8px}
-.ver{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--info-bg);color:var(--info-txt);font-weight:600}
-.upd{font-size:10px;color:var(--text3)}
+    /* stage colors */
+    --s-abierta:    #8b6914;
+    --s-diseno:     #1a6f8c;
+    --s-planchas:   #7b3f7b;
+    --s-preprensa:  #c1440e;
+    --s-produccion: #1d5e30;
+    --s-calidad:    #8b3a1a;
+    --s-cerrada:    #2a7a4b;
 
-/* MAIN */
-.main{max-width:1440px;margin:0 auto;padding:14px 18px 48px}
+    --card-w: 240px;
+    --col-gap: 14px;
+  }
 
-/* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin-bottom:12px}
-.kpi{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rad-lg);padding:9px 6px;text-align:center}
-.kpi-v{font-size:22px;font-weight:600;line-height:1.1;color:var(--text)}
-.kpi-l{font-size:10px;color:var(--text2);margin-top:3px;line-height:1.3}
-.kpi.cg .kpi-v{color:var(--ok-txt)}.kpi.cw .kpi-v{color:var(--warn-txt)}.kpi.cr .kpi-v{color:var(--danger-txt)}.kpi.cb .kpi-v{color:var(--info-txt)}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* TOOLBAR */
-.toolbar{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;background:var(--bg);border:.5px solid var(--border);border-radius:var(--rad-lg);padding:9px 13px}
-.tlbl{font-size:10px;color:var(--text3);font-weight:500}
-.fb{font-size:11px;padding:3px 10px;border-radius:99px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:var(--font)}
-.fb:hover{background:var(--bg2)}.fb.on{background:var(--info-bg);color:var(--info-txt);border-color:transparent;font-weight:600}
-.tsep{width:1px;height:16px;background:var(--border)}
-.srch{display:flex;align-items:center;gap:6px;margin-left:auto}
-.si{font-size:12px;padding:4px 10px;border-radius:99px;border:.5px solid var(--border2);background:var(--bg2);color:var(--text);font-family:var(--font);width:175px;outline:none;transition:border-color .15s}
-.si:focus{border-color:var(--info-txt)}
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
 
-/* LEGEND */
-.legend{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;padding:0 2px}
-.li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)}
-.ld{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  /* ── HEADER ── */
+  header {
+    background: var(--lead);
+    color: var(--white);
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; padding: 14px 0; }
+  .logo-mark {
+    width: 40px; height: 40px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: bold; letter-spacing: -1px;
+    color: #fff; border-radius: 2px;
+    font-family: 'Georgia', serif;
+    flex-shrink: 0;
+  }
+  .header-title { line-height: 1.15; }
+  .header-title h1 { font-size: 15px; font-weight: normal; letter-spacing: 1.5px; text-transform: uppercase; }
+  .header-title p  { font-size: 11px; color: #9fb4cd; letter-spacing: 0.5px; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .last-update { font-size: 11px; color: #9fb4cd; font-family: 'Courier New', monospace; }
+  .btn-form {
+    font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;
+    background: var(--accent); color: #fff; border: none; border-radius: 2px;
+    padding: 7px 14px; cursor: pointer; text-decoration: none; font-family: 'Georgia', serif;
+    transition: background .2s;
+  }
+  .btn-form:hover { background: #a83a0c; }
 
-/* PIPELINE */
-.pipeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;align-items:start}
-.silo{border:.5px solid var(--border);border-radius:var(--rad-lg);overflow:hidden;background:var(--bg)}
-.sh{padding:7px 9px;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--border);gap:4px}
-.sh i{font-size:13px}
-.badge{font-size:10px;font-weight:600;border-radius:99px;padding:1px 7px;min-width:18px;text-align:center}
-.sb{padding:5px;display:flex;flex-direction:column;gap:5px;min-height:56px}
-.empty{font-size:10px;color:var(--text3);text-align:center;padding:10px 4px}
+  /* ── KPI BAR ── */
+  .kpi-strip {
+    background: var(--ink);
+    padding: 0 28px;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 2px solid #2a3d52;
+    overflow-x: auto;
+  }
+  .kpi-item {
+    padding: 14px 24px;
+    border-right: 1px solid #2a3d52;
+    flex-shrink: 0;
+    cursor: default;
+  }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-num {
+    font-size: 26px; font-weight: bold; color: var(--white);
+    font-family: 'Courier New', monospace; line-height: 1;
+  }
+  .kpi-label { font-size: 10px; color: #7a9ab8; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 3px; }
+  .kpi-item.accent .kpi-num  { color: var(--accent); }
+  .kpi-item.gold   .kpi-num  { color: var(--gold); }
+  .kpi-item.green  .kpi-num  { color: #5acc8a; }
 
-/* SILO COLORS */
-.s0 .sh{background:#e6f1fb;color:#0c447c}.s0 .badge{background:#b5d4f4;color:#0c447c}
-.s1 .sh{background:#eeedfe;color:#3c3489}.s1 .badge{background:#cecbf6;color:#3c3489}
-.s2 .sh{background:#faeeda;color:#633806}.s2 .badge{background:#fac775;color:#633806}
-.s3 .sh{background:#fbeaf0;color:#72243e}.s3 .badge{background:#f4c0d1;color:#72243e}
-.s4 .sh{background:#eaf3de;color:#27500a}.s4 .badge{background:#c0dd97;color:#27500a}
-.s5 .sh{background:#e1f5ee;color:#085041}.s5 .badge{background:#9fe1cb;color:#085041}
-.s6 .sh{background:#f1efe8;color:#444441}.s6 .badge{background:#d3d1c7;color:#444441}
-@media(prefers-color-scheme:dark){
-  .s0 .sh{background:#042c53;color:#b5d4f4}.s0 .badge{background:#0c447c;color:#b5d4f4}
-  .s1 .sh{background:#26215c;color:#cecbf6}.s1 .badge{background:#3c3489;color:#cecbf6}
-  .s2 .sh{background:#412402;color:#fac775}.s2 .badge{background:#633806;color:#fac775}
-  .s3 .sh{background:#4b1528;color:#f4c0d1}.s3 .badge{background:#72243e;color:#f4c0d1}
-  .s4 .sh{background:#173404;color:#c0dd97}.s4 .badge{background:#27500a;color:#c0dd97}
-  .s5 .sh{background:#04342c;color:#9fe1cb}.s5 .badge{background:#085041;color:#9fe1cb}
-  .s6 .sh{background:#2c2c2a;color:#d3d1c7}.s6 .badge{background:#444441;color:#d3d1c7}
-}
+  /* ── FILTERS ── */
+  .filter-bar {
+    background: var(--sand);
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filter-bar label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: .6px; flex-shrink: 0; }
+  .filter-bar select, .filter-bar input {
+    font-size: 12px; font-family: 'Georgia', serif;
+    border: 1px solid var(--rule); background: var(--white);
+    color: var(--ink); border-radius: 2px; padding: 5px 10px;
+    outline: none;
+  }
+  .filter-bar select:focus, .filter-bar input:focus { border-color: var(--lead); }
+  .btn-clear {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .6px;
+    background: none; border: 1px solid #aaa; border-radius: 2px;
+    padding: 5px 12px; cursor: pointer; color: #666; font-family: 'Georgia', serif;
+    transition: all .2s;
+  }
+  .btn-clear:hover { background: var(--white); border-color: var(--lead); color: var(--lead); }
+  .ot-count { font-size: 11px; color: #888; margin-left: auto; font-family: 'Courier New', monospace; }
 
-/* CARDS */
-.card{border:.5px solid var(--border);border-radius:var(--rad);padding:6px 8px;cursor:pointer;transition:background .15s,box-shadow .15s;position:relative;background:var(--bg)}
-.card:hover{background:var(--bg2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.card.ha{padding-left:11px}
-.astrip{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:4px 0 0 4px}
-.ar{background:var(--danger-txt)}.ay{background:var(--warn-txt)}
-.cot{font-size:9px;font-weight:600;color:var(--text3);margin-bottom:1px}
-.cname{font-size:10px;font-weight:600;color:var(--text);line-height:1.3}
-.cdep{font-size:9px;color:var(--text3);margin-top:1px}
-.cmeta{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
-.pill{font-size:8px;padding:1px 5px;border-radius:99px;white-space:nowrap;font-weight:600}
-.pb{background:var(--info-bg);color:var(--info-txt)}
-.pg{background:var(--ok-bg);color:var(--ok-txt)}
-.pw{background:var(--warn-bg);color:var(--warn-txt)}
-.pgr{background:var(--bg2);color:var(--text2)}
-.pr{background:var(--danger-bg);color:var(--danger-txt)}
-.pp{background:var(--partial-bg);color:var(--partial-txt)}
-.pbar{height:3px;border-radius:2px;background:var(--border);margin-top:5px}
-.pfill{height:3px;border-radius:2px}
+  /* ── KANBAN BOARD ── */
+  .board-wrap {
+    padding: 20px 28px;
+    overflow-x: auto;
+    min-height: calc(100vh - 200px);
+  }
+  .board {
+    display: flex;
+    gap: var(--col-gap);
+    min-width: max-content;
+    align-items: flex-start;
+  }
 
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-start;justify-content:center;padding:32px 16px;overflow-y:auto}
-.overlay.open{display:flex}
-.modal{background:var(--bg);border:.5px solid var(--border2);border-radius:var(--rad-lg);padding:18px 20px;width:100%;max-width:480px;position:relative;margin:auto}
-.mclose{position:absolute;top:11px;right:11px;cursor:pointer;color:var(--text2);font-size:17px;background:none;border:none;line-height:1;padding:2px}
-.mclose:hover{color:var(--text)}
-.mtitle{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;padding-right:22px}
-.mot{font-size:10px;color:var(--text2);margin-bottom:10px}
-.sect{margin-bottom:10px}
-.slbl{font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;padding-bottom:2px;border-bottom:.5px solid var(--border)}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.field{font-size:11px;color:var(--text2);padding:2px 0}
-.field span{color:var(--text);font-weight:600}
-.abox{border-radius:var(--rad);padding:7px 9px;font-size:11px;margin-bottom:8px;display:flex;align-items:flex-start;gap:6px;line-height:1.4}
-.aboxr{background:var(--danger-bg);color:var(--danger-txt)}
-.aboxy{background:var(--warn-bg);color:var(--warn-txt)}
-.pt{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
-.pts{font-size:9px;padding:2px 7px;border-radius:99px;border:.5px solid var(--border);color:var(--text3)}
-.pts.act{background:var(--info-bg);color:var(--info-txt);border-color:transparent;font-weight:600}
-.pts.dn{background:var(--ok-bg);color:var(--ok-txt);border-color:transparent}
-.etbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}
-.etbl th{font-size:9px;font-weight:600;color:var(--text3);text-align:left;padding:2px 4px;border-bottom:.5px solid var(--border)}
-.etbl td{padding:3px 4px;color:var(--text2);border-bottom:.5px solid var(--border)}
-.obs{font-size:11px;color:var(--text2);line-height:1.5}
+  /* ── STAGE COLUMN ── */
+  .stage-col {
+    width: var(--card-w);
+    flex-shrink: 0;
+  }
+  .stage-header {
+    padding: 8px 12px 7px;
+    border-radius: 2px 2px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .stage-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 0; right: 0;
+    height: 2px;
+    background: inherit;
+    background-color: var(--stage-color, #888);
+    opacity: .3;
+  }
+  .stage-name {
+    font-size: 10px; font-weight: bold; letter-spacing: 1.2px;
+    text-transform: uppercase; color: #fff;
+    font-family: 'Courier New', monospace;
+  }
+  .stage-badge {
+    background: rgba(255,255,255,.25);
+    color: #fff;
+    font-size: 11px; font-family: 'Courier New', monospace;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+  }
 
-/* FOOTER */
-.footer{text-align:center;font-size:10px;color:var(--text3);margin-top:24px;padding-top:12px;border-top:.5px solid var(--border)}
+  .stage-abierta   .stage-header { background: var(--s-abierta); }
+  .stage-diseno    .stage-header { background: var(--s-diseno); }
+  .stage-planchas  .stage-header { background: var(--s-planchas); }
+  .stage-preprensa .stage-header { background: var(--s-preprensa); }
+  .stage-produccion .stage-header { background: var(--s-produccion); }
+  .stage-calidad   .stage-header { background: var(--s-calidad); }
+  .stage-cerrada   .stage-header { background: var(--s-cerrada); }
 
-/* RESPONSIVE */
-@media(max-width:1100px){.pipeline{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:760px){.kpi-row{grid-template-columns:repeat(4,1fr)}.pipeline{grid-template-columns:repeat(2,1fr)}.tb-sub{display:none}}
-@media(max-width:480px){.kpi-row{grid-template-columns:repeat(2,1fr)}.pipeline{grid-template-columns:1fr 1fr}}
+  .cards-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 60px;
+  }
+
+  /* ── OT CARD ── */
+  .ot-card {
+    background: var(--white);
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--stage-color, #aaa);
+    padding: 10px 11px;
+    cursor: pointer;
+    transition: box-shadow .15s, transform .12s;
+    position: relative;
+  }
+  .ot-card:hover {
+    box-shadow: 0 3px 14px rgba(0,0,0,.12);
+    transform: translateY(-1px);
+  }
+  .card-id {
+    font-family: 'Courier New', monospace;
+    font-size: 9px; color: #888; letter-spacing: .5px;
+    margin-bottom: 5px;
+  }
+  .card-nombre {
+    font-size: 12px; line-height: 1.35; color: var(--ink);
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .card-tipo {
+    font-size: 10px; color: #666;
+    background: var(--sand);
+    display: inline-block;
+    padding: 1px 6px; border-radius: 1px;
+    margin-bottom: 6px;
+  }
+  .card-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; color: #777;
+    border-top: 1px solid var(--rule);
+    padding-top: 6px; margin-top: 2px;
+  }
+  .card-dep { 
+    font-size: 9.5px; color: #888;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 130px;
+  }
+  .card-qty { font-family: 'Courier New', monospace; color: var(--lead2); font-size: 11px; }
+  .card-date { font-family: 'Courier New', monospace; font-size: 9px; }
+  .date-ok  { color: var(--green); }
+  .date-risk { color: var(--accent); }
+  .date-warn { color: var(--gold); }
+
+  /* alert chips */
+  .card-alerts { display: flex; gap: 4px; margin-bottom: 5px; flex-wrap: wrap; }
+  .chip {
+    font-size: 9px; border-radius: 1px;
+    padding: 1px 5px; letter-spacing: .3px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+  }
+  .chip-red    { background: #fde8e4; color: var(--accent); border: 1px solid #f4bdb4; }
+  .chip-yellow { background: #fef7e0; color: #8a6800; border: 1px solid #f0d97a; }
+  .chip-green  { background: #e4f4ea; color: var(--green); border: 1px solid #a8d8bc; }
+  .chip-blue   { background: #e0eef5; color: var(--cyan); border: 1px solid #9ec8d8; }
+
+  /* stage color stripes */
+  .stage-abierta    .ot-card { border-left-color: var(--s-abierta); }
+  .stage-diseno     .ot-card { border-left-color: var(--s-diseno); }
+  .stage-planchas   .ot-card { border-left-color: var(--s-planchas); }
+  .stage-preprensa  .ot-card { border-left-color: var(--s-preprensa); }
+  .stage-produccion .ot-card { border-left-color: var(--s-produccion); }
+  .stage-calidad    .ot-card { border-left-color: var(--s-calidad); }
+  .stage-cerrada    .ot-card { border-left-color: var(--s-cerrada); }
+
+  /* ── EMPTY COLUMN ── */
+  .empty-lane {
+    border: 2px dashed var(--rule);
+    border-radius: 2px;
+    padding: 18px 12px;
+    text-align: center;
+    color: #bbb;
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(15,25,35,.65);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white);
+    width: 100%; max-width: 680px;
+    border-radius: 2px;
+    border-top: 4px solid var(--lead);
+    max-height: 90vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-head {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 12px;
+  }
+  .modal-head-left { flex: 1; }
+  .modal-ot-id {
+    font-family: 'Courier New', monospace;
+    font-size: 11px; color: #888; margin-bottom: 4px;
+  }
+  .modal-title { font-size: 16px; line-height: 1.3; color: var(--lead); }
+  .modal-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 22px; color: #888; line-height: 1;
+    padding: 0 4px; flex-shrink: 0;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal-status-bar {
+    padding: 8px 22px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--sand);
+  }
+  .status-pill {
+    font-size: 11px; font-family: 'Courier New', monospace;
+    padding: 3px 10px; border-radius: 20px; font-weight: bold;
+    letter-spacing: .5px;
+  }
+  .modal-body {
+    overflow-y: auto; padding: 18px 22px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .section-head {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: #888; border-bottom: 1px solid var(--rule);
+    padding-bottom: 4px; margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
+  .field label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: .5px; display: block; margin-bottom: 2px; }
+  .field span  { font-size: 13px; color: var(--ink); }
+  .field span.mono { font-family: 'Courier New', monospace; }
+  .obs-box {
+    background: #fafaf7; border: 1px solid var(--rule);
+    border-left: 3px solid var(--lead2);
+    padding: 9px 12px; border-radius: 1px;
+    font-size: 12px; line-height: 1.5; color: #444;
+    font-style: italic;
+  }
+  .obs-box:empty::before { content: '—'; color: #bbb; font-style: normal; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--lead);
+    color: #7a9ab8;
+    font-size: 10px;
+    text-align: center;
+    padding: 10px 28px;
+    letter-spacing: .5px;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--sand); }
+  ::-webkit-scrollbar-thumb { background: #bbb; border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    header { padding: 0 14px; }
+    .kpi-strip { padding: 0 14px; }
+    .filter-bar { padding: 10px 14px; }
+    .board-wrap { padding: 14px; }
+    .header-title h1 { font-size: 13px; }
+  }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="tbl">
-    <div class="logo"><i class="ti ti-printer"></i></div>
-    <div>
-      <div class="tb-title">Imprenta Unimetro</div>
-      <div class="tb-sub">Dashboard Operativo · OT Maestra v1.1 · Jun 2026</div>
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-left">
+    <div class="logo-mark">IU</div>
+    <div class="header-title">
+      <h1>Imprenta UniMetro · Órdenes de Trabajo</h1>
+      <p>Dashboard operativo — pipeline completo</p>
     </div>
   </div>
-  <div class="tbr">
-    <span class="upd" id="upd"></span>
-    <span class="ver">v1.1</span>
+  <div class="header-right">
+    <div class="live-dot" title="Datos en tiempo real"></div>
+    <span class="last-update" id="lastUpdate"></span>
+    <a class="btn-form" href="https://forms.cloud.microsoft/r/8YPuy6Bc6t?origin=lprLink" target="_blank">+ Nueva Solicitud</a>
   </div>
 </header>
 
-<main class="main">
+<!-- ── KPI BAR ── -->
+<div class="kpi-strip" id="kpiStrip">
+  <!-- injected by JS -->
+</div>
 
-  <div class="kpi-row">
-    <div class="kpi cb"><div class="kpi-v" id="k0">12</div><div class="kpi-l">Total OTs</div></div>
-    <div class="kpi cg"><div class="kpi-v" id="k1">2</div><div class="kpi-l">Cerradas ✓</div></div>
-    <div class="kpi cb"><div class="kpi-v" id="k2">10</div><div class="kpi-l">En proceso</div></div>
-    <div class="kpi cw"><div class="kpi-v" id="k3">2</div><div class="kpi-l">En espera 🟡</div></div>
-    <div class="kpi cr"><div class="kpi-v" id="k4">1</div><div class="kpi-l">Bloqueadas 🔴</div></div>
-    <div class="kpi cg"><div class="kpi-v" id="k5">2</div><div class="kpi-l">SLA cumplido</div></div>
-    <div class="kpi"><div class="kpi-v" id="k6">27.550</div><div class="kpi-l">Unidades en OT</div></div>
-    <div class="kpi cw"><div class="kpi-v" id="k7">1</div><div class="kpi-l">Parciales</div></div>
-  </div>
+<!-- ── FILTERS ── -->
+<div class="filter-bar">
+  <label>Filtrar:</label>
+  <select id="fDep">
+    <option value="">Todas las dependencias</option>
+  </select>
+  <select id="fEstado">
+    <option value="">Todos los estados</option>
+  </select>
+  <input type="text" id="fSearch" placeholder="Buscar OT, nombre, solicitante…" style="width:230px">
+  <button class="btn-clear" onclick="clearFilters()">Limpiar</button>
+  <span class="ot-count" id="otCount"></span>
+</div>
 
-  <div class="toolbar">
-    <span class="tlbl">Área:</span>
-    <button class="fb on" onclick="fil('all',this)">Todas</button>
-    <button class="fb" onclick="fil('Rectoria',this)">Rectoría</button>
-    <button class="fb" onclick="fil('Vicerrectoria',this)">Vicerrectoría</button>
-    <button class="fb" onclick="fil('Biblioteca',this)">Biblioteca</button>
-    <button class="fb" onclick="fil('Administrativa',this)">Administrativa</button>
-    <div class="tsep"></div>
-    <span class="tlbl">Ver:</span>
-    <button class="fb" onclick="fil('alerta',this)">⚠ Con alerta</button>
-    <button class="fb" onclick="fil('cerrada',this)">✓ Cerradas</button>
-    <div class="srch">
-      <i class="ti ti-search" style="color:var(--text3);font-size:13px"></i>
-      <input class="si" type="text" placeholder="Buscar OT…" oninput="search(this.value)">
+<!-- ── BOARD ── -->
+<div class="board-wrap">
+  <div class="board" id="board"></div>
+</div>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-ot-id" id="mId"></div>
+        <div class="modal-title" id="mNombre"></div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
     </div>
-  </div>
-
-  <div class="legend">
-    <span style="font-size:10px;font-weight:600;color:var(--text2)">Alertas:</span>
-    <span class="li"><span class="ld" style="background:var(--danger-txt)"></span>🔴 Bloqueada — sin insumos, sin ruta</span>
-    <span class="li"><span class="ld" style="background:var(--warn-txt)"></span>🟡 En espera — aprobación/insumo pendiente</span>
-    <span class="li"><span class="ld" style="background:var(--ok-txt)"></span>Sin alerta — avanzando</span>
-    <span class="li"><span class="pill pp" style="font-size:9px">parcial</span>Entrega parcial</span>
-  </div>
-
-  <div class="pipeline">
-    <div class="silo s0"><div class="sh"><span><i class="ti ti-file-text"></i> Solicitud</span><span class="badge" id="b0">0</span></div><div class="sb" id="s0"></div></div>
-    <div class="silo s1"><div class="sh"><span><i class="ti ti-palette"></i> Diseño</span><span class="badge" id="b1">0</span></div><div class="sb" id="s1"></div></div>
-    <div class="silo s2"><div class="sh"><span><i class="ti ti-shopping-cart"></i> Compras</span><span class="badge" id="b2">0</span></div><div class="sb" id="s2"></div></div>
-    <div class="silo s3"><div class="sh"><span><i class="ti ti-layers"></i> Preprensa</span><span class="badge" id="b3">0</span></div><div class="sb" id="s3"></div></div>
-    <div class="silo s4"><div class="sh"><span><i class="ti ti-settings"></i> Producción</span><span class="badge" id="b4">0</span></div><div class="sb" id="s4"></div></div>
-    <div class="silo s5"><div class="sh"><span><i class="ti ti-clipboard-check"></i> Calidad</span><span class="badge" id="b5">0</span></div><div class="sb" id="s5"></div></div>
-    <div class="silo s6"><div class="sh"><span><i class="ti ti-package"></i> Entrega/KPIs</span><span class="badge" id="b6">0</span></div><div class="sb" id="s6"></div></div>
-  </div>
-
-  <div class="footer">Imprenta Unimetro · Dashboard Operativo v1.1 · Responsable: Julio Rivera · Solo lectura — datos actualizados por el coordinador de imprenta</div>
-</main>
-
-<div class="overlay" id="ov" onclick="ovc(event)">
-  <div class="modal">
-    <button class="mclose" onclick="cm()" aria-label="Cerrar"><i class="ti ti-x"></i></button>
-    <div id="mc"></div>
+    <div class="modal-status-bar">
+      <span class="status-pill" id="mEstadoPill"></span>
+      <span id="mMeta" style="font-size:11px;color:#666;font-family:'Courier New',monospace;"></span>
+    </div>
+    <div class="modal-body" id="mBody"></div>
   </div>
 </div>
 
+<footer id="footerBar">Imprenta UM · Proyecto Reactivación Productiva · Datos extraídos de Master_Pedido_OT_Imprenta_UM_v1.xlsx</footer>
+
 <script>
-const SN=["Solicitud","Diseño","Compras","Preprensa","Producción","Calidad","Entrega"];
+// ═══════════════════════════════════════════════════════
+//  DATA  (from Master_Pedido_OT_Imprenta_UM_v1.xlsx)
+// ═══════════════════════════════════════════════════════
+const OTS = [{"id":"OT-UM-202605-001","nombre":"Miniblocks - Mercadeo / pieza promocional unimetro","tipo":"MiniBlocks","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"950","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/05/2026","estado":"Producción","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"20 x 13","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"19/05/2026","fecha_fin_prod":"","cant_producida":"950","entrega_parcial":"40","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 40 Memos al Dpto de Comunicaciones y Diseño para evento ","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-002","nombre":"Memos - pieza de mercadeo para el area de comunicaciones","tipo":"Memos","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"570","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/05/2026","estado":"Producción","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"9 x 9","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"21/05/2026","fecha_fin_prod":"","cant_producida":"562","entrega_parcial":"50","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 50 Memos al Dpto de Comunicaciones y Diseño para evento ","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-003","nombre":"Agendas  - Material interno y de distribución externa para primer semestre","tipo":"Agendas","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro Guerra","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"18/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"02/06/2026","obs_diseno":"El diseño está siendo bajado a ctp - Planchas. Está faltando los anillos de las agendas","planchas":"No","formato":"","color":"Full color","material":"Bond 75 g","acabado":"Anillado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro Guerra","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-004","nombre":"Abanicos - Material de promoción de la universidad","tipo":"Abanicos","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"20/05/2026","fecha_requerida":"22/06/2026","estado":"Abierta","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"","obs_diseno":"Idea en maduración , sin diseño, sin embargo ya está la OC del material, que se puede usar para Abanico o para volantes, llegado el caso","planchas":"No","formato":"","color":"Dos tintas","material":"Propalcote","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-005","nombre":"Actas de Grado","tipo":"Actas de grado","dependencia":"Vicerrectoria","solicitante":"Indira Luz de la Rosa","correo":"idelarosa@unimetro.edu.co","cantidad":"1000","prioridad":"Normal","fecha_solicitud":"11/05/2026","fecha_requerida":"11/06/2026","estado":"Cerrada","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"11/12/2025","obs_diseno":"Diseño y Plancha existente tamaño carta. ","planchas":"Sí","formato":"28 x 22","color":"Dos tintas","material":"Opalina","acabado":"Tinta Seguridad","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"02/06/2026","fecha_fin_prod":"04/06/2026","cant_producida":"1250","entrega_parcial":"0","calidad_ok":"Sí","obs_calidad":"Se agregan pequeños visos de seguridad  ","fecha_entrega":"11/06/2026","recibido_por":"Indira Luz de la Rosa","fecha_cierre":"11/06/2026","tiempo_ciclo":"31","sla":"Sí","obs_cierre":"Se aplica barniz al logo de UM resaltar el nombre . Se entregan más de las 1000 inicialmente pactadas. "},{"id":"OT-UM-202604-006","nombre":"Tarjetas de Prestamo","tipo":"Tarjetas Prestamo Biblioteca","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos, ","planchas":"Sí","formato":"18.5 x 10.5","color":"Una tinta","material":"Bond 75 g","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-007","nombre":"Bolsillos de tarjeta de préstamo","tipo":"Bolsillos de tarjeta de préstamo","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos, ","planchas":"Sí","formato":"17 x 10.5","color":"Una tinta","material":"Cartulina","acabado":"Doblado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-008","nombre":"Adhesivos de Colores para categorizar grupos de Libros","tipo":"Adhesivos de Colores","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"1300","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"13/05/2026","estado":"Cerrada","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"06/05/2026","obs_diseno":"No requirió diseño, planca tampoco. Si material adhesivo que se utilizó","planchas":"Sí","formato":"28 x 22","color":"Una tinta","material":"Adhesivo","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"07/05/2026","fecha_fin_prod":"11/05/2026","cant_producida":"1300","entrega_parcial":"","calidad_ok":"Sí","obs_calidad":"Se entregaron por paquetes en Biblioteca según pedido","fecha_entrega":"12/05/2026","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"13/05/2026","tiempo_ciclo":"34","sla":"Sí","obs_cierre":"Se entregan  conforme a los colores solicitados por biblioteca"},{"id":"OT-UM-202605-009","nombre":"Hojas membreteadas uso institucional para varias dependencias","tipo":"Hojas Membreteadas","dependencia":"Vicerrectoria - Direccion Administrativa","solicitante":"Elio Ortiz","correo":"eortizg@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"28/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"12/05/2026","obs_diseno":"Existe Diseño, pero falta bajarla en plancha","planchas":"No","formato":"28 x 22","color":"Una tinta","material":"Bond 75 g","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Elio Ortiz","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-010","nombre":"Individuales para bandejas de plazoleta de comidas","tipo":"Individuales para bandejas","dependencia":"Rectoría - Alta consejería","solicitante":"Julian Ramirez","correo":"jramirezo@unimetro.edu.co","cantidad":"2500","prioridad":"Normal","fecha_solicitud":"13/05/2026","fecha_requerida":"03/07/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"13/05/2026","obs_diseno":"Se realizó una prueba con diseño v1. Se está evaluando el segundo diseño por parte de rectoria.","planchas":"No","formato":"","color":"Full color","material":"Otro","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Julian Ramirez","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-011","nombre":"Volantes de programas académicos Pregrado - Medicina","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"30/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-012","nombre":"Volante programas Pregrado - Bacteriología · Enfermería · Fisioterapia · Fonoaudiología · Nutrición","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-013","nombre":"Volante programas Pregrado - Odontología · Optometría · Psicología · Terapia Ocupacional · Trabajo Social","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Abierta","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"16/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""}];
 
-// Excel serial → date string (Colombia)
-function xd(s){if(!s||isNaN(s))return'—';const d=new Date((s-25569)*86400000);return d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'})}
-
-const OTs=[
-  {ot:"OT-UM-202605-001",nombre:"Miniblocks — pieza promocional",tipo:"MiniBlocks",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:950,fReq:46172,estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"20×13 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:950,calidad:"Sí",sla:"Pendiente",alerta:null,pct:72,obs:"Sangrado 0.5 cm para corte y refilo. Primera entrega parcial realizada 28 May (500 uds).",entregas:[{fecha:"28 May",cant:500,rec:"Camilo Robledo",nota:"Primera entrega parcial"}]},
-  {ot:"OT-UM-202605-002",nombre:"Memos — pieza de mercadeo",tipo:"Memos",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:570,fReq:46172,estado:"Producción",silo:4,clienteOk:"Sí",planchas:"Sí",formato:"9×9 cm",tintas:"Dos tintas",material:"Bond 75 g",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:562,calidad:"Sí",sla:"Pendiente",alerta:null,pct:72,obs:"562 de 570 unidades producidas. Pendiente 8 uds y entrega final.",entregas:[]},
-  {ot:"OT-UM-202605-003",nombre:"Agendas primer semestre",tipo:"Agendas",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Jose Luis Castro Guerra",correo:"vice-rectoria@unimetro.edu.co",cant:1500,fReq:46188,estado:"Diseño",silo:1,clienteOk:"Sí",planchas:"No",formato:"—",tintas:"Full color",material:"Bond 75 g",acabado:"Anillado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"espera",pct:15,obs:"Diseño en Rectoría para aprobación. Material pedido el 20 May. Seguimiento a diseño el 22 May. Sin planchas.",entregas:[]},
-  {ot:"OT-UM-202605-004",nombre:"Abanicos — promoción UM",tipo:"Abanicos",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Jose Luis Castro",correo:"vice-rectoria@unimetro.edu.co",cant:1500,fReq:46195,estado:"Abierta",silo:2,clienteOk:"No",planchas:"No",formato:"—",tintas:"Dos tintas",material:"Propalcote",acabado:"Plastificado brillante",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"bloqueada",pct:8,obs:"Idea en maduración — sin diseño, sin plancha. OC material en proceso. Requiere decisión de Vicerrectoría para avanzar.",entregas:[]},
-  {ot:"OT-UM-202605-005",nombre:"Actas de Grado",tipo:"Actas de grado",dep:"Vicerrectoria",dk:"Vicerrectoria",sol:"Indira Luz de la Rosa",correo:"idelarosa@unimetro.edu.co",cant:1000,fReq:46184,estado:"Cerrada",silo:6,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Dos tintas",material:"Opalina",acabado:"Tinta Seguridad + Barniz",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:1250,calidad:"Sí",sla:"Sí",alerta:null,pct:100,obs:"Producidas 1.250 (250 sobre el pedido). Barniz al logo UM. Entregadas el 27 May. Ciclo: 31 días. SLA cumplido.",entregas:[{fecha:"27 May",cant:1250,rec:"Indira Luz de la Rosa",nota:"Entrega total. OT cerrada. 250 uds adicionales incluidas."}]},
-  {ot:"OT-UM-202604-006",nombre:"Tarjetas de Préstamo Biblioteca",tipo:"Tarjetas Prestamo",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:5000,fReq:46198,estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"18.5×10.5 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Corte",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:45,obs:"Diseño, plancha y material listos. Lista para entrar a producción. Demora previa por material — llegó el 4 Mayo.",entregas:[]},
-  {ot:"OT-UM-202604-007",nombre:"Bolsillos tarjeta de préstamo",tipo:"Bolsillos",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:2000,fReq:46198,estado:"Preprensa",silo:3,clienteOk:"Sí",planchas:"Sí",formato:"17×10.5 cm",tintas:"Una tinta",material:"Cartulina",acabado:"Doblado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"Sí",sla:"Pendiente",alerta:null,pct:45,obs:"Diseño, plancha y material listos. Calidad de muestra OK. Material llegó inicios de Mayo.",entregas:[]},
-  {ot:"OT-UM-202604-008",nombre:"Adhesivos colores — Biblioteca",tipo:"Adhesivos de Colores",dep:"Vicerrectoría - Biblioteca",dk:"Biblioteca",sol:"Yarima Medrano Nazzer",correo:"directorabiblioteca@unimetro.edu.co",cant:1300,fReq:46155,estado:"Cerrada",silo:6,clienteOk:"Sí",planchas:"Sí",formato:"28×22 cm",tintas:"Una tinta",material:"Adhesivo",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:1300,calidad:"Sí",sla:"Sí",alerta:null,pct:100,obs:"Entregados el 11 May por paquetes en Biblioteca (Amarillo 500, Verde/Rosado/Gris/Azul 200 c/u). Ciclo: 34 días. SLA cumplido.",entregas:[{fecha:"11 May",cant:1300,rec:"Yarima Medrano Nazzer",nota:"Entrega total. OT cerrada."}]},
-  {ot:"OT-UM-202605-009",nombre:"Hojas membreteadas institucional",tipo:"Hojas Membreteadas",dep:"Vicerrectoria - Dirección Administrativa",dk:"Administrativa",sol:"Elio Ortiz",correo:"eortizg@unimetro.edu.co",cant:5000,fReq:46188,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"28×22 cm",tintas:"Una tinta",material:"Bond 75 g",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"Sí",sla:"Pendiente",alerta:"espera",pct:8,obs:"Diseño existe pero falta bajar plancha. Requiere compra de planchas antes de producción. Meta: finales de junio.",entregas:[]},
-  {ot:"OT-UM-202605-010",nombre:"Individuales para bandejas comidas",tipo:"Individuales para bandejas",dep:"Rectoría - Alta consejería",dk:"Rectoria",sol:"Julian Ramirez",correo:"jramirezo@unimetro.edu.co",cant:2500,fReq:46206,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color",material:"Otro",acabado:"Sin acabado",maquina:"Shinohara 52 Bicolor",stock:"No",cantProd:0,calidad:"No",sla:"Pendiente",alerta:"espera",pct:8,obs:"Primer diseño en prueba. Rectoría evaluando otro diseño. Número total de ejemplares aún sin definir.",entregas:[]},
-  {ot:"OT-UM-202606-011",nombre:"Volantes Medicina — programas académicos",tipo:"Volantes",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:2000,fReq:46203,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color (4 planchas/volante)",material:"—",acabado:"—",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:10,obs:"Diseño y aprobación en proceso. Policromía completa requiere 4 planchas por volante.",entregas:[]},
-  {ot:"OT-UM-202606-012",nombre:"Volantes Bacteriología / Enfermería / Fisioterapia / Fonoaudiología",tipo:"Volantes",dep:"Rectoría - Comunicaciones y Mercadeo",dk:"Rectoria",sol:"Camilo Robledo",correo:"coordinadordecontenidos@unimetro.edu.co",cant:4000,fReq:46213,estado:"Diseño",silo:1,clienteOk:"No",planchas:"No",formato:"—",tintas:"Full color",material:"—",acabado:"—",maquina:"Shinohara 52 Bicolor",stock:"Sí",cantProd:0,calidad:"No",sla:"Pendiente",alerta:null,pct:10,obs:"4 programas en una plancha (1.000 volantes c/u). Diseño en proceso.",entregas:[]},
+// ═══════════════════════════════════════════════════════
+//  PIPELINE STAGES
+// ═══════════════════════════════════════════════════════
+const STAGES = [
+  { key: 'Abierta',    label: 'Abierta',         cls: 'stage-abierta' },
+  { key: 'Diseño',     label: 'Diseño',           cls: 'stage-diseno' },
+  { key: 'Compras Planchas', label: 'Compras Planchas', cls: 'stage-planchas' },
+  { key: 'Preprensa',  label: 'Preprensa',        cls: 'stage-preprensa' },
+  { key: 'Producción', label: 'Producción',       cls: 'stage-produccion' },
+  { key: 'Calidad',    label: 'Control Calidad',  cls: 'stage-calidad' },
+  { key: 'Cerrada',    label: 'Entrega / Cerrada', cls: 'stage-cerrada' },
 ];
 
-let AF='all',ST='';
+const STATUS_COLORS = {
+  'Abierta':          { bg: '#fff8e8', text: '#8b6914', border: '#f0d87a' },
+  'Diseño':           { bg: '#e0eef5', text: '#1a6f8c', border: '#9ec8d8' },
+  'Compras Planchas': { bg: '#f2e8f2', text: '#7b3f7b', border: '#cca0cc' },
+  'Preprensa':        { bg: '#fde8e4', text: '#c1440e', border: '#f4bdb4' },
+  'Producción':       { bg: '#e4f4ea', text: '#1d5e30', border: '#a8d8bc' },
+  'Calidad':          { bg: '#fdf0e4', text: '#8b3a1a', border: '#f4ccaa' },
+  'Cerrada':          { bg: '#e4f4ea', text: '#2a7a4b', border: '#a8d8bc' },
+};
 
-function depMatch(ot,f){
-  if(f==='all') return true;
-  if(f==='Rectoria') return ot.dk==='Rectoria';
-  if(f==='Vicerrectoria') return ot.dk==='Vicerrectoria';
-  if(f==='Biblioteca') return ot.dk==='Biblioteca';
-  if(f==='Administrativa') return ot.dk==='Administrativa';
-  if(f==='alerta') return !!ot.alerta;
-  if(f==='cerrada') return ot.estado==='Cerrada';
-  return true;
+// ═══════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════
+function parseDate(s) {
+  if (!s) return null;
+  const [d, m, y] = s.split('/');
+  return new Date(+y, +m - 1, +d);
+}
+function today() { const t = new Date(); t.setHours(0,0,0,0); return t; }
+function daysDiff(s) {
+  const d = parseDate(s); if (!d) return null;
+  return Math.ceil((d - today()) / 86400000);
+}
+function dateClass(s, closed) {
+  if (closed) return 'date-ok';
+  const diff = daysDiff(s);
+  if (diff === null) return '';
+  if (diff < 0) return 'date-risk';
+  if (diff <= 5) return 'date-warn';
+  return 'date-ok';
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function getAlerts(ot) {
+  const chips = [];
+  const isClosed = ot.estado === 'Cerrada';
+  if (!isClosed) {
+    const diff = daysDiff(ot.fecha_requerida);
+    if (diff !== null && diff < 0)       chips.push(['chip-red', '⚠ VENCIDA']);
+    else if (diff !== null && diff <= 5) chips.push(['chip-yellow', `⏱ ${diff}d`]);
+  }
+  if (ot.requiere_compra === 'Sí' && !isClosed) chips.push(['chip-yellow', '🛒 Compra req.']);
+  if (ot.planchas === 'No' && !isClosed && ['Preprensa','Producción','Calidad'].includes(ot.estado))
+    chips.push(['chip-red', '🚫 Sin planchas']);
+  if (ot.entrega_parcial && ot.entrega_parcial !== '0' && !isClosed)
+    chips.push(['chip-blue', `📦 Parcial: ${ot.entrega_parcial}`]);
+  if (isClosed && ot.sla === 'Sí') chips.push(['chip-green', '✓ SLA OK']);
+  return chips;
 }
 
-function matches(ot){
-  if(!depMatch(ot,AF)) return false;
-  if(ST){const q=ST.toLowerCase();if(!ot.ot.toLowerCase().includes(q)&&!ot.nombre.toLowerCase().includes(q)&&!ot.tipo.toLowerCase().includes(q)&&!ot.dep.toLowerCase().includes(q)) return false;}
-  return true;
+function depShort(dep) {
+  const map = {
+    'Rectoría - Comunicaciones y Mercadeo': 'Rectoría · Com&Mkt',
+    'Rectoría - Alta consejería': 'Rectoría · Alta Cons.',
+    'Vicerrectoria': 'Vicerrectoría',
+    'Vicerrectoría - Biblioteca': 'Bibl. Unimetro',
+    'Vicerrectoria - Direccion Administrativa': 'Dir. Administrativa',
+  };
+  return map[dep] || dep;
 }
 
-function pc(p){return p>=80?'#639922':p>=40?'#ba7517':'#a32d2d'}
+// ═══════════════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════════════
+let filtered = [...OTS];
 
-function build(){
-  for(let i=0;i<7;i++){document.getElementById('s'+i).innerHTML='';document.getElementById('b'+i).textContent='0';}
-  const cnt=Array(7).fill(0);
-  OTs.forEach(ot=>{
-    if(!matches(ot)) return;
-    cnt[ot.silo]++;
-    const ha=ot.alerta?'ha':'';
-    const strip=ot.alerta==='bloqueada'?'<div class="astrip ar"></div>':ot.alerta?'<div class="astrip ay"></div>':'';
-    const ap=ot.alerta==='bloqueada'?'<span class="pill pr">🔴 bloqueada</span>':ot.alerta?'<span class="pill pw">🟡 en espera</span>':'';
-    const sp=ot.sla==='Sí'?'<span class="pill pg">SLA ✓</span>':'';
-    const pp=ot.entregas&&ot.entregas.length>0&&ot.sla!=='Sí'?'<span class="pill pp">parcial</span>':'';
-    document.getElementById('s'+ot.silo).insertAdjacentHTML('beforeend',
-      `<div class="card ${ha}" onclick="sd('${ot.ot}')">${strip}
-        <div class="cot">${ot.ot}</div>
-        <div class="cname">${ot.nombre}</div>
-        <div class="cdep">${ot.dep.split(' - ')[0]}</div>
-        <div class="cmeta"><span class="pill pgr">${ot.cant.toLocaleString('es-CO')} uds</span><span class="pill pgr">↗ ${xd(ot.fReq)}</span>${ap}${sp}${pp}</div>
-        <div class="pbar"><div class="pfill" style="width:${ot.pct}%;background:${pc(ot.pct)}"></div></div>
-      </div>`);
+function renderKPIs() {
+  const total   = OTS.length;
+  const cerradas = OTS.filter(o => o.estado === 'Cerrada').length;
+  const enCurso  = total - cerradas;
+  const slaOk    = OTS.filter(o => o.sla === 'Sí').length;
+  const vencidas = OTS.filter(o => o.estado !== 'Cerrada' && daysDiff(o.fecha_requerida) !== null && daysDiff(o.fecha_requerida) < 0).length;
+  const totalUnits = OTS.reduce((a,o)=>a+(parseInt(o.cantidad)||0),0);
+
+  document.getElementById('kpiStrip').innerHTML = `
+    <div class="kpi-item"><div class="kpi-num">${total}</div><div class="kpi-label">OTs Totales</div></div>
+    <div class="kpi-item"><div class="kpi-num">${enCurso}</div><div class="kpi-label">En Curso</div></div>
+    <div class="kpi-item green"><div class="kpi-num">${cerradas}</div><div class="kpi-label">Cerradas</div></div>
+    <div class="kpi-item gold"><div class="kpi-num">${slaOk}</div><div class="kpi-label">SLA Cumplido</div></div>
+    <div class="kpi-item accent"><div class="kpi-num">${vencidas}</div><div class="kpi-label">Vencidas</div></div>
+    <div class="kpi-item"><div class="kpi-num">${totalUnits.toLocaleString('es')}</div><div class="kpi-label">Unidades solicitadas</div></div>
+  `;
+}
+
+function renderFilters() {
+  const deps = [...new Set(OTS.map(o=>o.dependencia))].sort();
+  const states = [...new Set(OTS.map(o=>o.estado))];
+  const depSel = document.getElementById('fDep');
+  const estSel = document.getElementById('fEstado');
+  deps.forEach(d => { const opt = document.createElement('option'); opt.value=d; opt.textContent=d; depSel.appendChild(opt); });
+  states.forEach(s => { const opt = document.createElement('option'); opt.value=s; opt.textContent=s; estSel.appendChild(opt); });
+}
+
+function applyFilters() {
+  const dep    = document.getElementById('fDep').value;
+  const estado = document.getElementById('fEstado').value;
+  const q      = document.getElementById('fSearch').value.toLowerCase().trim();
+  filtered = OTS.filter(o => {
+    if (dep   && o.dependencia !== dep)    return false;
+    if (estado && o.estado !== estado)     return false;
+    if (q && ![o.id, o.nombre, o.solicitante, o.tipo].join(' ').toLowerCase().includes(q)) return false;
+    return true;
   });
-  for(let i=0;i<7;i++){
-    document.getElementById('b'+i).textContent=cnt[i];
-    if(cnt[i]===0) document.getElementById('s'+i).innerHTML='<div class="empty">Sin OTs</div>';
-  }
+  renderBoard();
 }
 
-function fil(f,btn){AF=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');build();}
-function search(v){ST=v.trim();build();}
-
-function sd(id){
-  const ot=OTs.find(o=>o.ot===id);if(!ot) return;
-  const track=SN.map((n,i)=>`<span class="pts ${i<ot.silo?'dn':i===ot.silo?'act':''}">${n}</span>`).join('');
-  const abox=ot.alerta==='bloqueada'
-    ?`<div class="abox aboxr"><i class="ti ti-alert-triangle"></i><div><strong>Bloqueada</strong> — Sin diseño, plancha ni material definido. Requiere decisión ejecutiva.</div></div>`
-    :ot.alerta
-    ?`<div class="abox aboxy"><i class="ti ti-clock"></i><div><strong>En espera</strong> — Insumos en trámite o aprobación pendiente. Ruta definida.</div></div>`:'';
-  let ent='<span style="font-size:11px;color:var(--text3)">Sin entregas registradas.</span>';
-  if(ot.entregas&&ot.entregas.length>0){
-    const rows=ot.entregas.map(e=>`<tr><td>${e.fecha}</td><td>${e.cant.toLocaleString('es-CO')}</td><td>${e.rec}</td><td>${e.nota}</td></tr>`).join('');
-    const tot=ot.entregas.reduce((s,e)=>s+e.cant,0);
-    ent=`<table class="etbl"><thead><tr><th>Fecha</th><th>Cant.</th><th>Recibió</th><th>Nota</th></tr></thead><tbody>${rows}</tbody></table>
-    <div style="display:flex;gap:12px;margin-top:6px;font-size:11px">
-      <span style="color:var(--text2)">Entregado: <strong style="color:var(--ok-txt)">${tot.toLocaleString('es-CO')}</strong></span>
-      <span style="color:var(--text2)">Pendiente: <strong style="color:var(--warn-txt)">${(ot.cant-tot).toLocaleString('es-CO')}</strong></span>
-    </div>`;
-  }
-  document.getElementById('mc').innerHTML=`
-    <div class="mtitle">${ot.nombre}</div>
-    <div class="mot">${ot.ot} · ${ot.estado} · ${ot.cant.toLocaleString('es-CO')} uds · ↗ ${xd(ot.fReq)}</div>
-    ${abox}
-    <div class="sect"><div class="slbl">Pipeline</div>
-      <div class="pt">${track}</div>
-      <div class="pbar" style="margin-top:7px"><div class="pfill" style="width:${ot.pct}%;background:${pc(ot.pct)}"></div></div>
-      <div style="font-size:10px;color:${pc(ot.pct)};margin-top:2px;text-align:right">${ot.pct}% completado</div>
-    </div>
-    <div class="sect"><div class="slbl">Solicitante</div>
-      <div class="r2">
-        <div class="field">Área: <span>${ot.dep}</span></div>
-        <div class="field">Contacto: <span>${ot.sol}</span></div>
-        <div class="field">Correo: <span style="font-weight:400">${ot.correo}</span></div>
-      </div>
-    </div>
-    <div class="sect"><div class="slbl">Especificación técnica</div>
-      <div class="r2">
-        <div class="field">Tipo: <span>${ot.tipo}</span></div>
-        <div class="field">Formato: <span>${ot.formato}</span></div>
-        <div class="field">Tintas: <span>${ot.tintas}</span></div>
-        <div class="field">Material: <span>${ot.material}</span></div>
-        <div class="field">Acabado: <span>${ot.acabado}</span></div>
-        <div class="field">Máquina: <span>${ot.maquina}</span></div>
-        <div class="field">Stock: <span>${ot.stock}</span></div>
-        <div class="field">Cliente aprobó: <span>${ot.clienteOk}</span></div>
-        <div class="field">Planchas: <span>${ot.planchas}</span></div>
-        <div class="field">Producidas: <span>${ot.cantProd.toLocaleString('es-CO')}</span></div>
-        <div class="field">Calidad OK: <span>${ot.calidad}</span></div>
-        <div class="field">SLA: <span>${ot.sla}</span></div>
-      </div>
-    </div>
-    <div class="sect"><div class="slbl">Entregas</div>${ent}</div>
-    <div class="sect"><div class="slbl">Observaciones</div><div class="obs">${ot.obs}</div></div>`;
-  document.getElementById('ov').classList.add('open');
+function clearFilters() {
+  document.getElementById('fDep').value = '';
+  document.getElementById('fEstado').value = '';
+  document.getElementById('fSearch').value = '';
+  applyFilters();
 }
-function ovc(e){if(e.target===document.getElementById('ov')) cm();}
-function cm(){document.getElementById('ov').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape') cm();});
 
-document.getElementById('upd').textContent='Actualizado: '+new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
-build();
+function renderBoard() {
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+
+  STAGES.forEach(stage => {
+    const ots = filtered.filter(o => o.estado === stage.key);
+
+    const col = document.createElement('div');
+    col.className = `stage-col ${stage.cls}`;
+    col.innerHTML = `
+      <div class="stage-header">
+        <span class="stage-name">${stage.label}</span>
+        <span class="stage-badge">${ots.length}</span>
+      </div>
+      <div class="cards-zone" id="zone-${stage.key.replace(/\s/g,'-')}">
+        ${ots.length === 0 ? '<div class="empty-lane">Sin OTs en este stage</div>' : ''}
+      </div>`;
+    board.appendChild(col);
+
+    const zone = col.querySelector('.cards-zone');
+    ots.forEach(ot => {
+      const alerts = getAlerts(ot);
+      const dCls   = dateClass(ot.fecha_requerida, ot.estado === 'Cerrada');
+      const card   = document.createElement('div');
+      card.className = 'ot-card';
+      card.innerHTML = `
+        <div class="card-id">${esc(ot.id)}</div>
+        ${alerts.length ? `<div class="card-alerts">${alerts.map(([cls,lbl])=>`<span class="chip ${cls}">${lbl}</span>`).join('')}</div>` : ''}
+        <div class="card-nombre">${esc(ot.nombre)}</div>
+        <div class="card-tipo">${esc(ot.tipo)}</div>
+        <div class="card-meta">
+          <span class="card-dep">${depShort(ot.dependencia)}</span>
+          <span class="card-qty">${ot.cantidad}</span>
+        </div>
+        <div class="card-meta" style="margin-top:5px;">
+          <span style="font-size:9px;color:#aaa;">Entrega:</span>
+          <span class="card-date ${dCls}">${ot.fecha_requerida || '—'}</span>
+        </div>`;
+      card.onclick = () => openModal(ot);
+      zone.appendChild(card);
+    });
+  });
+
+  document.getElementById('otCount').textContent = `${filtered.length} de ${OTS.length} OTs`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════════════
+function openModal(ot) {
+  document.getElementById('mId').textContent = ot.id;
+  document.getElementById('mNombre').textContent = ot.nombre;
+
+  const sc = STATUS_COLORS[ot.estado] || { bg:'#eee', text:'#333', border:'#ccc' };
+  const pill = document.getElementById('mEstadoPill');
+  pill.textContent = ot.estado;
+  pill.style.cssText = `background:${sc.bg};color:${sc.text};border:1px solid ${sc.border};`;
+
+  document.getElementById('mMeta').innerHTML =
+    `${ot.tipo} &nbsp;·&nbsp; ${ot.cantidad} uds &nbsp;·&nbsp; ${ot.solicitante} &nbsp;·&nbsp; ${ot.dependencia}`;
+
+  const alerts = getAlerts(ot);
+  const alertHtml = alerts.length
+    ? `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;">${alerts.map(([cls,lbl])=>`<span class="chip ${cls}" style="font-size:11px;padding:3px 8px;">${lbl}</span>`).join('')}</div>`
+    : '';
+
+  const body = document.getElementById('mBody');
+  body.innerHTML = `
+    ${alertHtml}
+
+    <!-- SOLICITUD -->
+    <div>
+      <div class="section-head">A · Información de Solicitud</div>
+      <div class="grid2">
+        <div class="field"><label>Fecha solicitud</label><span class="mono">${ot.fecha_solicitud}</span></div>
+        <div class="field"><label>Fecha requerida</label><span class="mono ${dateClass(ot.fecha_requerida, ot.estado==='Cerrada')}">${ot.fecha_requerida || '—'}</span></div>
+        <div class="field"><label>Solicitante</label><span>${ot.solicitante}</span></div>
+        <div class="field"><label>Correo</label><span style="font-size:11px;">${ot.correo}</span></div>
+        <div class="field"><label>Cantidad</label><span class="mono">${ot.cantidad}</span></div>
+        <div class="field"><label>Prioridad</label><span>${ot.prioridad}</span></div>
+        <div class="field"><label>Responsable OT</label><span>${ot.responsable}</span></div>
+      </div>
+    </div>
+
+    <!-- DISEÑO -->
+    <div>
+      <div class="section-head">B · Diseño</div>
+      <div class="grid3">
+        <div class="field"><label>Versión</label><span>${ot.version_diseno || '—'}</span></div>
+        <div class="field"><label>Cliente aprobó</label><span>${ot.cliente_aprobo || '—'}</span></div>
+        <div class="field"><label>Fecha aprobación</label><span class="mono">${ot.fecha_aprobacion || '—'}</span></div>
+      </div>
+      <div class="obs-box" style="margin-top:10px;">${esc(ot.obs_diseno)}</div>
+    </div>
+
+    <!-- PREPRENSA -->
+    <div>
+      <div class="section-head">C · Preprensa & Especificación Técnica</div>
+      <div class="grid3">
+        <div class="field"><label>Planchas listas</label><span>${ot.planchas || '—'}</span></div>
+        <div class="field"><label>Formato (cm)</label><span>${ot.formato || '—'}</span></div>
+        <div class="field"><label>Color / Tintas</label><span>${ot.color || '—'}</span></div>
+        <div class="field"><label>Material</label><span>${ot.material || '—'}</span></div>
+        <div class="field"><label>Acabado</label><span>${ot.acabado || '—'}</span></div>
+        <div class="field"><label>Máquina</label><span>${ot.maquina || '—'}</span></div>
+      </div>
+    </div>
+
+    <!-- PRODUCCIÓN -->
+    <div>
+      <div class="section-head">D · Producción</div>
+      <div class="grid3">
+        <div class="field"><label>Hay stock</label><span>${ot.hay_stock || '—'}</span></div>
+        <div class="field"><label>Requiere compra</label><span>${ot.requiere_compra || '—'}</span></div>
+        <div class="field"><label>Inicio producción</label><span class="mono">${ot.fecha_inicio_prod || '—'}</span></div>
+        <div class="field"><label>Fin producción</label><span class="mono">${ot.fecha_fin_prod || '—'}</span></div>
+        <div class="field"><label>Cant. producida</label><span class="mono">${ot.cant_producida || '—'}</span></div>
+        <div class="field"><label>Entrega parcial</label><span class="mono">${ot.entrega_parcial || '—'}</span></div>
+      </div>
+    </div>
+
+    <!-- CALIDAD Y CIERRE -->
+    <div>
+      <div class="section-head">E · Calidad & Cierre</div>
+      <div class="grid3">
+        <div class="field"><label>Control calidad OK</label><span>${ot.calidad_ok || '—'}</span></div>
+        <div class="field"><label>Fecha entrega</label><span class="mono">${ot.fecha_entrega || '—'}</span></div>
+        <div class="field"><label>Recibido por</label><span>${ot.recibido_por || '—'}</span></div>
+        <div class="field"><label>Fecha cierre</label><span class="mono">${ot.fecha_cierre || '—'}</span></div>
+        <div class="field"><label>Tiempo ciclo</label><span class="mono">${ot.tiempo_ciclo ? ot.tiempo_ciclo + ' días' : '—'}</span></div>
+        <div class="field"><label>SLA cumplido</label><span>${ot.sla || '—'}</span></div>
+      </div>
+      ${ot.obs_calidad ? `<div class="obs-box" style="margin-top:10px;">${esc(ot.obs_calidad)}</div>` : ''}
+      ${ot.obs_cierre  ? `<div class="obs-box" style="margin-top:8px;">${esc(ot.obs_cierre)}</div>`  : ''}
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+function init() {
+  // Last update timestamp
+  const now = new Date();
+  document.getElementById('lastUpdate').textContent =
+    `Act. ${now.toLocaleDateString('es-CO',{day:'2-digit',month:'short'})} ${now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'})}`;
+
+  renderKPIs();
+  renderFilters();
+  applyFilters();
+
+  document.getElementById('fDep').addEventListener('change', applyFilters);
+  document.getElementById('fEstado').addEventListener('change', applyFilters);
+  document.getElementById('fSearch').addEventListener('input', applyFilters);
+}
+
+init();
 </script>
 </body>
 </html>
