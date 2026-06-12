@@ -6,264 +6,171 @@
 <title>Dashboard Operativo · Imprenta UM</title>
 <style>
   :root {
-    --ink:     #0f1923;
-    --paper:   #f5f2ec;
-    --rule:    #ddd8cf;
-    --lead:    #1d3557;
-    --lead2:   #274978;
-    --accent:  #c1440e;
-    --gold:    #d4a017;
-    --green:   #2a7a4b;
-    --cyan:    #1a6f8c;
-    --purple:  #5a4a8a;
-    --sand:    #e8e2d6;
-    --white:   #ffffff;
+    --um-blue:   #00AEEF;
+    --um-navy:   #003F72;
+    --um-navy2:  #00529b;
+    --ink:       #0f1923;
+    --paper:     #f4f6f9;
+    --rule:      #dde3ea;
+    --accent:    #e8360d;
+    --gold:      #f0a500;
+    --green:     #1e8c4a;
+    --sand:      #edf1f5;
+    --white:     #ffffff;
 
-    /* stage colors */
-    --s-abierta:    #8b6914;
-    --s-diseno:     #1a6f8c;
-    --s-planchas:   #7b3f7b;
-    --s-preprensa:  #c1440e;
-    --s-produccion: #1d5e30;
-    --s-calidad:    #8b3a1a;
-    --s-cerrada:    #2a7a4b;
+    --s-abierta:    #f0a500;
+    --s-diseno:     #00AEEF;
+    --s-planchas:   #7b3f9a;
+    --s-preprensa:  #e8360d;
+    --s-produccion: #1e8c4a;
+    --s-calidad:    #8b4513;
+    --s-cerrada:    #003F72;
 
-    --card-w: 240px;
-    --col-gap: 14px;
+    --card-w: 238px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-  }
+  body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
 
   /* ── HEADER ── */
   header {
-    background: var(--lead);
-    color: var(--white);
-    padding: 0 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 3px solid var(--accent);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--um-navy);
+    border-bottom: 3px solid var(--um-blue);
+    position: sticky; top: 0; z-index: 100;
   }
-  .header-left { display: flex; align-items: center; gap: 14px; padding: 14px 0; }
-  .logo-mark {
-    width: 40px; height: 40px;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: bold; letter-spacing: -1px;
-    color: #fff; border-radius: 2px;
-    font-family: 'Georgia', serif;
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; gap: 16px;
+  }
+  .header-left { display: flex; align-items: center; gap: 0; }
+
+  /* Logo area */
+  .logo-wrap {
+    display: flex; align-items: center;
+    padding: 10px 0;
+    gap: 14px;
+  }
+  .logo-img {
+    height: 38px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1); /* white on dark navy */
+  }
+  .logo-divider {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,0.25);
     flex-shrink: 0;
   }
-  .header-title { line-height: 1.15; }
-  .header-title h1 { font-size: 15px; font-weight: normal; letter-spacing: 1.5px; text-transform: uppercase; }
-  .header-title p  { font-size: 11px; color: #9fb4cd; letter-spacing: 0.5px; }
-  .header-right { display: flex; align-items: center; gap: 16px; }
-  .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-  .last-update { font-size: 11px; color: #9fb4cd; font-family: 'Courier New', monospace; }
-  .btn-form {
-    font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;
-    background: var(--accent); color: #fff; border: none; border-radius: 2px;
-    padding: 7px 14px; cursor: pointer; text-decoration: none; font-family: 'Georgia', serif;
-    transition: background .2s;
+  .header-subtitle {
+    display: flex; flex-direction: column; gap: 1px;
   }
-  .btn-form:hover { background: #a83a0c; }
+  .header-subtitle span:first-child {
+    font-size: 13px; font-weight: 700; color: #fff;
+    letter-spacing: 0.3px; line-height: 1.2;
+  }
+  .header-subtitle span:last-child {
+    font-size: 10px; color: var(--um-blue); letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .header-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+  .live-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; color: #8ec8e8; letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+  }
+  .live-dot { width: 7px; height: 7px; background: #4cde8a; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .btn-form {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    background: var(--um-blue); color: var(--um-navy);
+    border: none; border-radius: 3px; padding: 8px 16px;
+    cursor: pointer; text-decoration: none;
+    transition: background .2s; white-space: nowrap;
+  }
+  .btn-form:hover { background: #33c0f5; }
 
   /* ── KPI BAR ── */
   .kpi-strip {
-    background: var(--ink);
-    padding: 0 28px;
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    border-bottom: 2px solid #2a3d52;
+    background: #001f3f;
+    border-bottom: 1px solid #1a3a5c;
+    padding: 0 24px;
+    display: flex; align-items: stretch; gap: 0;
     overflow-x: auto;
   }
   .kpi-item {
-    padding: 14px 24px;
-    border-right: 1px solid #2a3d52;
-    flex-shrink: 0;
-    cursor: default;
+    padding: 12px 22px; border-right: 1px solid #1a3a5c;
+    flex-shrink: 0; cursor: default;
   }
   .kpi-item:last-child { border-right: none; }
   .kpi-num {
-    font-size: 26px; font-weight: bold; color: var(--white);
+    font-size: 24px; font-weight: 700; color: #fff;
     font-family: 'Courier New', monospace; line-height: 1;
   }
-  .kpi-label { font-size: 10px; color: #7a9ab8; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 3px; }
-  .kpi-item.accent .kpi-num  { color: var(--accent); }
-  .kpi-item.gold   .kpi-num  { color: var(--gold); }
-  .kpi-item.green  .kpi-num  { color: #5acc8a; }
+  .kpi-label { font-size: 9px; color: #5a8aaa; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 3px; }
+  .kpi-blue  .kpi-num { color: var(--um-blue); }
+  .kpi-gold  .kpi-num { color: var(--gold); }
+  .kpi-green .kpi-num { color: #4cde8a; }
+  .kpi-red   .kpi-num { color: #ff6b4a; }
 
-  /* ── FILTERS ── */
+  /* ── FILTER BAR ── */
   .filter-bar {
-    background: var(--sand);
-    border-bottom: 1px solid var(--rule);
-    padding: 10px 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    background: var(--white); border-bottom: 1px solid var(--rule);
+    padding: 9px 24px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
-  .filter-bar label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: .6px; flex-shrink: 0; }
+  .filter-bar label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: .6px; flex-shrink: 0; font-weight: 600; }
   .filter-bar select, .filter-bar input {
-    font-size: 12px; font-family: 'Georgia', serif;
-    border: 1px solid var(--rule); background: var(--white);
-    color: var(--ink); border-radius: 2px; padding: 5px 10px;
-    outline: none;
+    font-size: 12px; border: 1px solid var(--rule);
+    background: var(--sand); color: var(--ink); border-radius: 3px;
+    padding: 5px 10px; outline: none; font-family: inherit;
   }
-  .filter-bar select:focus, .filter-bar input:focus { border-color: var(--lead); }
+  .filter-bar select:focus, .filter-bar input:focus { border-color: var(--um-blue); }
   .btn-clear {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .6px;
-    background: none; border: 1px solid #aaa; border-radius: 2px;
-    padding: 5px 12px; cursor: pointer; color: #666; font-family: 'Georgia', serif;
-    transition: all .2s;
+    font-size: 11px; background: none; border: 1px solid #ccc;
+    border-radius: 3px; padding: 5px 12px; cursor: pointer; color: #666;
+    font-family: inherit; transition: all .15s;
   }
-  .btn-clear:hover { background: var(--white); border-color: var(--lead); color: var(--lead); }
-  .ot-count { font-size: 11px; color: #888; margin-left: auto; font-family: 'Courier New', monospace; }
+  .btn-clear:hover { border-color: var(--um-navy); color: var(--um-navy); }
+  .ot-count { font-size: 11px; color: #aaa; margin-left: auto; font-family: 'Courier New', monospace; }
 
-  /* ── KANBAN BOARD ── */
-  .board-wrap {
-    padding: 20px 28px;
-    overflow-x: auto;
-    min-height: calc(100vh - 200px);
-  }
-  .board {
-    display: flex;
-    gap: var(--col-gap);
-    min-width: max-content;
-    align-items: flex-start;
-  }
+  /* ── BOARD ── */
+  .board-wrap { padding: 18px 24px; overflow-x: auto; min-height: calc(100vh - 210px); }
+  .board { display: flex; gap: 12px; min-width: max-content; align-items: flex-start; }
 
   /* ── STAGE COLUMN ── */
-  .stage-col {
-    width: var(--card-w);
-    flex-shrink: 0;
-  }
+  .stage-col { width: var(--card-w); flex-shrink: 0; }
   .stage-header {
-    padding: 8px 12px 7px;
-    border-radius: 2px 2px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 8px 11px 7px; border-radius: 4px 4px 0 0;
+    display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 8px;
-    position: relative;
   }
-  .stage-header::after {
-    content: '';
-    position: absolute;
-    bottom: -8px; left: 0; right: 0;
-    height: 2px;
-    background: inherit;
-    background-color: var(--stage-color, #888);
-    opacity: .3;
-  }
-  .stage-name {
-    font-size: 10px; font-weight: bold; letter-spacing: 1.2px;
-    text-transform: uppercase; color: #fff;
-    font-family: 'Courier New', monospace;
-  }
+  .stage-name { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #fff; }
   .stage-badge {
-    background: rgba(255,255,255,.25);
-    color: #fff;
-    font-size: 11px; font-family: 'Courier New', monospace;
-    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(255,255,255,0.22); color: #fff;
+    font-size: 11px; font-weight: 700; font-family: 'Courier New', monospace;
+    min-width: 22px; height: 22px; border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
-    font-weight: bold;
+    padding: 0 5px;
   }
-
-  .stage-abierta   .stage-header { background: var(--s-abierta); }
-  .stage-diseno    .stage-header { background: var(--s-diseno); }
-  .stage-planchas  .stage-header { background: var(--s-planchas); }
-  .stage-preprensa .stage-header { background: var(--s-preprensa); }
+  .stage-abierta    .stage-header { background: var(--s-abierta); }
+  .stage-diseno     .stage-header { background: var(--s-diseno); }
+  .stage-planchas   .stage-header { background: var(--s-planchas); }
+  .stage-preprensa  .stage-header { background: var(--s-preprensa); }
   .stage-produccion .stage-header { background: var(--s-produccion); }
-  .stage-calidad   .stage-header { background: var(--s-calidad); }
-  .stage-cerrada   .stage-header { background: var(--s-cerrada); }
+  .stage-calidad    .stage-header { background: var(--s-calidad); }
+  .stage-cerrada    .stage-header { background: var(--s-cerrada); }
 
-  .cards-zone {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-height: 60px;
-  }
+  .cards-zone { display: flex; flex-direction: column; gap: 8px; min-height: 50px; }
 
   /* ── OT CARD ── */
   .ot-card {
-    background: var(--white);
-    border-radius: 2px;
-    border: 1px solid var(--rule);
-    border-left: 3px solid var(--stage-color, #aaa);
-    padding: 10px 11px;
-    cursor: pointer;
-    transition: box-shadow .15s, transform .12s;
-    position: relative;
+    background: var(--white); border-radius: 4px;
+    border: 1px solid var(--rule); border-left: 3px solid var(--stage-col-color, #ccc);
+    padding: 10px 11px; cursor: pointer;
+    transition: box-shadow .15s, transform .1s;
   }
-  .ot-card:hover {
-    box-shadow: 0 3px 14px rgba(0,0,0,.12);
-    transform: translateY(-1px);
-  }
-  .card-id {
-    font-family: 'Courier New', monospace;
-    font-size: 9px; color: #888; letter-spacing: .5px;
-    margin-bottom: 5px;
-  }
-  .card-nombre {
-    font-size: 12px; line-height: 1.35; color: var(--ink);
-    font-weight: bold;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
-  .card-tipo {
-    font-size: 10px; color: #666;
-    background: var(--sand);
-    display: inline-block;
-    padding: 1px 6px; border-radius: 1px;
-    margin-bottom: 6px;
-  }
-  .card-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 10px; color: #777;
-    border-top: 1px solid var(--rule);
-    padding-top: 6px; margin-top: 2px;
-  }
-  .card-dep { 
-    font-size: 9.5px; color: #888;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    max-width: 130px;
-  }
-  .card-qty { font-family: 'Courier New', monospace; color: var(--lead2); font-size: 11px; }
-  .card-date { font-family: 'Courier New', monospace; font-size: 9px; }
-  .date-ok  { color: var(--green); }
-  .date-risk { color: var(--accent); }
-  .date-warn { color: var(--gold); }
+  .ot-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); transform: translateY(-1px); }
 
-  /* alert chips */
-  .card-alerts { display: flex; gap: 4px; margin-bottom: 5px; flex-wrap: wrap; }
-  .chip {
-    font-size: 9px; border-radius: 1px;
-    padding: 1px 5px; letter-spacing: .3px;
-    font-family: 'Courier New', monospace;
-    display: inline-block;
-  }
-  .chip-red    { background: #fde8e4; color: var(--accent); border: 1px solid #f4bdb4; }
-  .chip-yellow { background: #fef7e0; color: #8a6800; border: 1px solid #f0d97a; }
-  .chip-green  { background: #e4f4ea; color: var(--green); border: 1px solid #a8d8bc; }
-  .chip-blue   { background: #e0eef5; color: var(--cyan); border: 1px solid #9ec8d8; }
-
-  /* stage color stripes */
   .stage-abierta    .ot-card { border-left-color: var(--s-abierta); }
   .stage-diseno     .ot-card { border-left-color: var(--s-diseno); }
   .stage-planchas   .ot-card { border-left-color: var(--s-planchas); }
@@ -272,163 +179,162 @@
   .stage-calidad    .ot-card { border-left-color: var(--s-calidad); }
   .stage-cerrada    .ot-card { border-left-color: var(--s-cerrada); }
 
-  /* ── EMPTY COLUMN ── */
+  .card-id { font-family: 'Courier New', monospace; font-size: 9px; color: #aaa; margin-bottom: 4px; }
+  .card-nombre {
+    font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    margin-bottom: 5px;
+  }
+  .card-tipo {
+    font-size: 10px; color: #666; background: var(--sand);
+    display: inline-block; padding: 1px 6px; border-radius: 2px; margin-bottom: 5px;
+  }
+  .card-alerts { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 5px; }
+  .chip {
+    font-size: 9px; border-radius: 2px; padding: 1px 5px;
+    letter-spacing: .2px; font-weight: 600; display: inline-block;
+  }
+  .chip-red    { background: #fde8e4; color: #c0280a; border: 1px solid #f5b5aa; }
+  .chip-yellow { background: #fff5dc; color: #8a5c00; border: 1px solid #f0d070; }
+  .chip-green  { background: #e2f5eb; color: #1a6e38; border: 1px solid #8ecfaa; }
+  .chip-blue   { background: #ddf0fc; color: #006da8; border: 1px solid #88ccf0; }
+
+  .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--rule); padding-top: 6px; margin-top: 4px;
+  }
+  .card-dep { font-size: 9.5px; color: #999; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+  .card-qty { font-family: 'Courier New', monospace; color: var(--um-navy2); font-size: 11px; font-weight: 700; }
+  .card-date { font-family: 'Courier New', monospace; font-size: 9px; }
+  .date-ok   { color: var(--green); }
+  .date-risk { color: var(--accent); font-weight: 700; }
+  .date-warn { color: var(--gold); font-weight: 700; }
+
   .empty-lane {
-    border: 2px dashed var(--rule);
-    border-radius: 2px;
-    padding: 18px 12px;
-    text-align: center;
-    color: #bbb;
-    font-size: 11px;
-    font-style: italic;
+    border: 2px dashed var(--rule); border-radius: 4px;
+    padding: 18px 10px; text-align: center;
+    color: #ccc; font-size: 11px; font-style: italic;
   }
 
   /* ── MODAL ── */
   .modal-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(15,25,35,.65);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,20,45,.6); z-index: 200;
+    align-items: center; justify-content: center; padding: 20px;
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: var(--white);
-    width: 100%; max-width: 680px;
-    border-radius: 2px;
-    border-top: 4px solid var(--lead);
-    max-height: 90vh;
-    display: flex; flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    background: var(--white); width: 100%; max-width: 680px;
+    border-radius: 6px; border-top: 4px solid var(--um-blue);
+    max-height: 90vh; display: flex; flex-direction: column;
+    overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.3);
   }
   .modal-head {
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid var(--rule);
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 12px;
+    padding: 18px 22px 14px; border-bottom: 1px solid var(--rule);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
   }
-  .modal-head-left { flex: 1; }
-  .modal-ot-id {
-    font-family: 'Courier New', monospace;
-    font-size: 11px; color: #888; margin-bottom: 4px;
-  }
-  .modal-title { font-size: 16px; line-height: 1.3; color: var(--lead); }
-  .modal-close {
-    background: none; border: none; cursor: pointer;
-    font-size: 22px; color: #888; line-height: 1;
-    padding: 0 4px; flex-shrink: 0;
-  }
+  .modal-ot-id { font-family: 'Courier New', monospace; font-size: 11px; color: #aaa; margin-bottom: 4px; }
+  .modal-title { font-size: 16px; font-weight: 700; color: var(--um-navy); line-height: 1.3; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 22px; color: #aaa; padding: 0 4px; }
   .modal-close:hover { color: var(--ink); }
+
   .modal-status-bar {
-    padding: 8px 22px;
-    display: flex; align-items: center; gap: 10px;
-    border-bottom: 1px solid var(--rule);
-    background: var(--sand);
+    padding: 8px 22px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--rule); background: var(--sand); flex-wrap: wrap;
   }
   .status-pill {
-    font-size: 11px; font-family: 'Courier New', monospace;
-    padding: 3px 10px; border-radius: 20px; font-weight: bold;
-    letter-spacing: .5px;
+    font-size: 11px; font-weight: 700; font-family: 'Courier New', monospace;
+    padding: 3px 11px; border-radius: 20px; letter-spacing: .4px;
   }
-  .modal-body {
-    overflow-y: auto; padding: 18px 22px;
-    display: flex; flex-direction: column; gap: 18px;
-  }
+  .modal-body { overflow-y: auto; padding: 18px 22px; display: flex; flex-direction: column; gap: 18px; }
+
   .section-head {
-    font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
-    color: #888; border-bottom: 1px solid var(--rule);
-    padding-bottom: 4px; margin-bottom: 10px;
-    font-family: 'Courier New', monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: #aaa;
+    border-bottom: 1px solid var(--rule); padding-bottom: 4px; margin-bottom: 10px;
+    font-weight: 700;
   }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
   .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px 20px; }
-  .field label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: .5px; display: block; margin-bottom: 2px; }
+  .field label { font-size: 10px; color: #bbb; text-transform: uppercase; letter-spacing: .5px; display: block; margin-bottom: 2px; font-weight: 600; }
   .field span  { font-size: 13px; color: var(--ink); }
   .field span.mono { font-family: 'Courier New', monospace; }
   .obs-box {
-    background: #fafaf7; border: 1px solid var(--rule);
-    border-left: 3px solid var(--lead2);
-    padding: 9px 12px; border-radius: 1px;
+    background: #f8fafc; border: 1px solid var(--rule);
+    border-left: 3px solid var(--um-blue);
+    padding: 9px 12px; border-radius: 3px;
     font-size: 12px; line-height: 1.5; color: #444;
-    font-style: italic;
   }
-  .obs-box:empty::before { content: '—'; color: #bbb; font-style: normal; }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--lead);
-    color: #7a9ab8;
-    font-size: 10px;
-    text-align: center;
-    padding: 10px 28px;
-    letter-spacing: .5px;
-    font-family: 'Courier New', monospace;
+    background: var(--um-navy); color: #5a8aaa;
+    font-size: 10px; text-align: center; padding: 10px 24px;
+    letter-spacing: .4px; font-family: 'Courier New', monospace;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
   }
+  .footer-logo { height: 18px; opacity: .5; filter: brightness(0) invert(1); }
 
-  /* scrollbar */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--sand); }
-  ::-webkit-scrollbar-thumb { background: #bbb; border-radius: 3px; }
-
-  @media (max-width: 600px) {
-    header { padding: 0 14px; }
-    .kpi-strip { padding: 0 14px; }
-    .filter-bar { padding: 10px 14px; }
-    .board-wrap { padding: 14px; }
-    .header-title h1 { font-size: 13px; }
-  }
+  ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
-  <div class="header-left">
-    <div class="logo-mark">IU</div>
-    <div class="header-title">
-      <h1>Imprenta UniMetro · Órdenes de Trabajo</h1>
-      <p>Dashboard operativo — pipeline completo</p>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="logo-wrap">
+        <!-- Official Unimetro logo from CDN -->
+        <img
+          class="logo-img"
+          src="https://cloud.unimetro.edu.co/wp-content/uploads/2025/12/logo-header.png"
+          alt="Universidad Metropolitana"
+          onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
+        />
+        <!-- SVG fallback that matches UM branding exactly -->
+        <svg id="logoFallback" style="display:none;height:36px;width:auto;" viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+          <rect width="46" height="46" rx="3" fill="#00AEEF"/>
+          <text x="23" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="900" fill="#003F72">UM</text>
+          <text x="58" y="18" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" letter-spacing="0.5">Universidad</text>
+          <text x="58" y="34" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#00AEEF" letter-spacing="0.5">Metropolitana</text>
+        </svg>
+        <div class="logo-divider"></div>
+        <div class="header-subtitle">
+          <span>Imprenta UM · Órdenes de Trabajo</span>
+          <span>Dashboard Operativo</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="header-right">
-    <div class="live-dot" title="Datos en tiempo real"></div>
-    <span class="last-update" id="lastUpdate"></span>
-    <a class="btn-form" href="https://forms.cloud.microsoft/r/8YPuy6Bc6t?origin=lprLink" target="_blank">+ Nueva Solicitud</a>
+    <div class="header-right">
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        <span id="lastUpdate"></span>
+      </div>
+      <a class="btn-form" href="https://forms.cloud.microsoft/r/8YPuy6Bc6t?origin=lprLink" target="_blank">＋ Nueva Solicitud</a>
+    </div>
   </div>
 </header>
 
-<!-- ── KPI BAR ── -->
-<div class="kpi-strip" id="kpiStrip">
-  <!-- injected by JS -->
-</div>
+<div class="kpi-strip" id="kpiStrip"></div>
 
-<!-- ── FILTERS ── -->
 <div class="filter-bar">
   <label>Filtrar:</label>
-  <select id="fDep">
-    <option value="">Todas las dependencias</option>
-  </select>
-  <select id="fEstado">
-    <option value="">Todos los estados</option>
-  </select>
-  <input type="text" id="fSearch" placeholder="Buscar OT, nombre, solicitante…" style="width:230px">
-  <button class="btn-clear" onclick="clearFilters()">Limpiar</button>
+  <select id="fDep"><option value="">Todas las dependencias</option></select>
+  <select id="fEstado"><option value="">Todos los estados</option></select>
+  <input type="text" id="fSearch" placeholder="Buscar OT, nombre, solicitante…" style="width:220px">
+  <button class="btn-clear" onclick="clearFilters()">✕ Limpiar</button>
   <span class="ot-count" id="otCount"></span>
 </div>
 
-<!-- ── BOARD ── -->
 <div class="board-wrap">
   <div class="board" id="board"></div>
 </div>
 
-<!-- ── MODAL ── -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-head">
-      <div class="modal-head-left">
+      <div style="flex:1">
         <div class="modal-ot-id" id="mId"></div>
         <div class="modal-title" id="mNombre"></div>
       </div>
@@ -436,222 +342,185 @@
     </div>
     <div class="modal-status-bar">
       <span class="status-pill" id="mEstadoPill"></span>
-      <span id="mMeta" style="font-size:11px;color:#666;font-family:'Courier New',monospace;"></span>
+      <span id="mMeta" style="font-size:11px;color:#888;font-family:'Courier New',monospace;"></span>
     </div>
     <div class="modal-body" id="mBody"></div>
   </div>
 </div>
 
-<footer id="footerBar">Imprenta UM · Proyecto Reactivación Productiva · Datos extraídos de Master_Pedido_OT_Imprenta_UM_v1.xlsx</footer>
+<footer>
+  <img class="footer-logo" src="https://cloud.unimetro.edu.co/wp-content/uploads/2025/12/logo-header.png" alt="UM"
+       onerror="this.style.display='none'">
+  Imprenta Universidad Metropolitana · Proyecto Reactivación Productiva · Fuente: Master_Pedido_OT_Imprenta_UM_v1.xlsx
+</footer>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  DATA  (from Master_Pedido_OT_Imprenta_UM_v1.xlsx)
-// ═══════════════════════════════════════════════════════
-const OTS = [{"id":"OT-UM-202605-001","nombre":"Miniblocks - Mercadeo / pieza promocional unimetro","tipo":"MiniBlocks","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"950","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/05/2026","estado":"Producción","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"20 x 13","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"19/05/2026","fecha_fin_prod":"","cant_producida":"950","entrega_parcial":"40","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 40 Memos al Dpto de Comunicaciones y Diseño para evento ","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-002","nombre":"Memos - pieza de mercadeo para el area de comunicaciones","tipo":"Memos","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"570","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/05/2026","estado":"Producción","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"9 x 9","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"21/05/2026","fecha_fin_prod":"","cant_producida":"562","entrega_parcial":"50","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 50 Memos al Dpto de Comunicaciones y Diseño para evento ","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-003","nombre":"Agendas  - Material interno y de distribución externa para primer semestre","tipo":"Agendas","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro Guerra","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"18/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"02/06/2026","obs_diseno":"El diseño está siendo bajado a ctp - Planchas. Está faltando los anillos de las agendas","planchas":"No","formato":"","color":"Full color","material":"Bond 75 g","acabado":"Anillado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro Guerra","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-004","nombre":"Abanicos - Material de promoción de la universidad","tipo":"Abanicos","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"20/05/2026","fecha_requerida":"22/06/2026","estado":"Abierta","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"","obs_diseno":"Idea en maduración , sin diseño, sin embargo ya está la OC del material, que se puede usar para Abanico o para volantes, llegado el caso","planchas":"No","formato":"","color":"Dos tintas","material":"Propalcote","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-005","nombre":"Actas de Grado","tipo":"Actas de grado","dependencia":"Vicerrectoria","solicitante":"Indira Luz de la Rosa","correo":"idelarosa@unimetro.edu.co","cantidad":"1000","prioridad":"Normal","fecha_solicitud":"11/05/2026","fecha_requerida":"11/06/2026","estado":"Cerrada","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"11/12/2025","obs_diseno":"Diseño y Plancha existente tamaño carta. ","planchas":"Sí","formato":"28 x 22","color":"Dos tintas","material":"Opalina","acabado":"Tinta Seguridad","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"02/06/2026","fecha_fin_prod":"04/06/2026","cant_producida":"1250","entrega_parcial":"0","calidad_ok":"Sí","obs_calidad":"Se agregan pequeños visos de seguridad  ","fecha_entrega":"11/06/2026","recibido_por":"Indira Luz de la Rosa","fecha_cierre":"11/06/2026","tiempo_ciclo":"31","sla":"Sí","obs_cierre":"Se aplica barniz al logo de UM resaltar el nombre . Se entregan más de las 1000 inicialmente pactadas. "},{"id":"OT-UM-202604-006","nombre":"Tarjetas de Prestamo","tipo":"Tarjetas Prestamo Biblioteca","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos, ","planchas":"Sí","formato":"18.5 x 10.5","color":"Una tinta","material":"Bond 75 g","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-007","nombre":"Bolsillos de tarjeta de préstamo","tipo":"Bolsillos de tarjeta de préstamo","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos, ","planchas":"Sí","formato":"17 x 10.5","color":"Una tinta","material":"Cartulina","acabado":"Doblado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-008","nombre":"Adhesivos de Colores para categorizar grupos de Libros","tipo":"Adhesivos de Colores","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"1300","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"13/05/2026","estado":"Cerrada","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"06/05/2026","obs_diseno":"No requirió diseño, planca tampoco. Si material adhesivo que se utilizó","planchas":"Sí","formato":"28 x 22","color":"Una tinta","material":"Adhesivo","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"07/05/2026","fecha_fin_prod":"11/05/2026","cant_producida":"1300","entrega_parcial":"","calidad_ok":"Sí","obs_calidad":"Se entregaron por paquetes en Biblioteca según pedido","fecha_entrega":"12/05/2026","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"13/05/2026","tiempo_ciclo":"34","sla":"Sí","obs_cierre":"Se entregan  conforme a los colores solicitados por biblioteca"},{"id":"OT-UM-202605-009","nombre":"Hojas membreteadas uso institucional para varias dependencias","tipo":"Hojas Membreteadas","dependencia":"Vicerrectoria - Direccion Administrativa","solicitante":"Elio Ortiz","correo":"eortizg@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"28/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"12/05/2026","obs_diseno":"Existe Diseño, pero falta bajarla en plancha","planchas":"No","formato":"28 x 22","color":"Una tinta","material":"Bond 75 g","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Elio Ortiz","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-010","nombre":"Individuales para bandejas de plazoleta de comidas","tipo":"Individuales para bandejas","dependencia":"Rectoría - Alta consejería","solicitante":"Julian Ramirez","correo":"jramirezo@unimetro.edu.co","cantidad":"2500","prioridad":"Normal","fecha_solicitud":"13/05/2026","fecha_requerida":"03/07/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"13/05/2026","obs_diseno":"Se realizó una prueba con diseño v1. Se está evaluando el segundo diseño por parte de rectoria.","planchas":"No","formato":"","color":"Full color","material":"Otro","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Julian Ramirez","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-011","nombre":"Volantes de programas académicos Pregrado - Medicina","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"30/06/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-012","nombre":"Volante programas Pregrado - Bacteriología · Enfermería · Fisioterapia · Fonoaudiología · Nutrición","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Diseño","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-013","nombre":"Volante programas Pregrado - Odontología · Optometría · Psicología · Terapia Ocupacional · Trabajo Social","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Abierta","responsable":"Julio Rivera","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"16/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""}];
+const OTS = [{"id":"OT-UM-202605-001","nombre":"Miniblocks - Mercadeo / pieza promocional unimetro","tipo":"MiniBlocks","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"950","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/06/2026","estado":"Producción","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"20 x 13","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"19/05/2026","fecha_fin_prod":"","cant_producida":"40","entrega_parcial":"40","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 40 Memos al Dpto de Comunicaciones y Diseño para evento","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-002","nombre":"Memos - pieza de mercadeo para el area de comunicaciones","tipo":"Memos","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"570","prioridad":"Normal","fecha_solicitud":"12/05/2026","fecha_requerida":"30/06/2026","estado":"Producción","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"25/05/2026","obs_diseno":"Dejar 1/2 cm de sangrado para corte y refilo","planchas":"Sí","formato":"9 x 9","color":"Dos tintas","material":"Bond 75 g","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"21/05/2026","fecha_fin_prod":"","cant_producida":"50","entrega_parcial":"50","calidad_ok":"Sí","obs_calidad":"Entrega Parcial 50 Memos al Dpto de Comunicaciones y Diseño para evento","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-003","nombre":"Agendas - Material interno y de distribución externa para primer semestre","tipo":"Agendas","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro Guerra","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"18/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"02/06/2026","obs_diseno":"El diseño está siendo bajado a ctp - Planchas. Está faltando los anillos de las agendas","planchas":"No","formato":"16x22","color":"Full color","material":"Bond 75 g","acabado":"Anillado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro Guerra","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-004","nombre":"Abanicos - Material de promoción de la universidad","tipo":"Abanicos","dependencia":"Vicerrectoria","solicitante":"Jose Luis Castro","correo":"vice-rectoria@unimetro.edu.co","cantidad":"1500","prioridad":"Normal","fecha_solicitud":"20/05/2026","fecha_requerida":"22/06/2026","estado":"Abierta","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"","obs_diseno":"Idea en maduración, sin diseño, sin embargo ya está la OC del material, que se puede usar para Abanico o para volantes, llegado el caso","planchas":"No","formato":"","color":"Dos tintas","material":"Propalcote","acabado":"Plastificado brillante","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Jose Luis Castro","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-005","nombre":"Actas de Grado","tipo":"Actas de grado","dependencia":"Vicerrectoria","solicitante":"Indira Luz de la Rosa","correo":"idelarosa@unimetro.edu.co","cantidad":"1000","prioridad":"Normal","fecha_solicitud":"11/05/2026","fecha_requerida":"11/06/2026","estado":"Cerrada","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"11/12/2025","obs_diseno":"Diseño y Plancha existente tamaño carta.","planchas":"Sí","formato":"28 x 22","color":"Dos tintas","material":"Opalina","acabado":"Tinta Seguridad","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"02/06/2026","fecha_fin_prod":"04/06/2026","cant_producida":"1250","entrega_parcial":"0","calidad_ok":"Sí","obs_calidad":"Se agregan pequeños visos de seguridad","fecha_entrega":"11/06/2026","recibido_por":"Indira Luz de la Rosa","fecha_cierre":"11/06/2026","tiempo_ciclo":"31","sla":"Sí","obs_cierre":"Se aplica barniz al logo de UM para resaltar el nombre. Se entregan más de las 1000 inicialmente pactadas."},{"id":"OT-UM-202604-006","nombre":"Tarjetas de Prestamo","tipo":"Tarjetas Prestamo Biblioteca","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos","planchas":"Sí","formato":"18.5 x 10.5","color":"Una tinta","material":"Bond 75 g","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-007","nombre":"Bolsillos de tarjeta de préstamo","tipo":"Bolsillos tarjeta préstamo","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"25/06/2026","estado":"Preprensa","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"05/05/2026","obs_diseno":"Diseño, Plancha y Material ya listos","planchas":"Sí","formato":"17 x 10.5","color":"Una tinta","material":"Cartulina","acabado":"Doblado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202604-008","nombre":"Adhesivos de Colores para categorizar grupos de Libros","tipo":"Adhesivos de Colores","dependencia":"Vicerrectoría - Biblioteca","solicitante":"Yarima Medrano Nazzer","correo":"directorabiblioteca@unimetro.edu.co","cantidad":"1300","prioridad":"Normal","fecha_solicitud":"09/04/2026","fecha_requerida":"13/05/2026","estado":"Cerrada","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"Sí","fecha_aprobacion":"06/05/2026","obs_diseno":"No requirió diseño ni plancha. Sí material adhesivo que se utilizó","planchas":"Sí","formato":"28 x 22","color":"Una tinta","material":"Adhesivo","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"07/05/2026","fecha_fin_prod":"11/05/2026","cant_producida":"1300","entrega_parcial":"","calidad_ok":"Sí","obs_calidad":"Se entregaron por paquetes en Biblioteca según pedido","fecha_entrega":"12/05/2026","recibido_por":"Yarima Medrano Nazzer","fecha_cierre":"13/05/2026","tiempo_ciclo":"34","sla":"Sí","obs_cierre":"Se entregan conforme a los colores solicitados por biblioteca"},{"id":"OT-UM-202605-009","nombre":"Hojas membreteadas uso institucional para varias dependencias","tipo":"Hojas Membreteadas","dependencia":"Vicerrectoria - Direccion Administrativa","solicitante":"Elio Ortiz","correo":"eortizg@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"28/05/2026","fecha_requerida":"15/06/2026","estado":"Diseño","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"12/05/2026","obs_diseno":"Existe Diseño, pero falta bajarla en plancha","planchas":"No","formato":"28 x 22","color":"Una tinta","material":"Bond 75 g","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Elio Ortiz","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202605-010","nombre":"Individuales para bandejas de plazoleta de comidas","tipo":"Individuales para bandejas","dependencia":"Rectoría - Alta consejería","solicitante":"Julian Ramirez","correo":"jramirezo@unimetro.edu.co","cantidad":"2500","prioridad":"Normal","fecha_solicitud":"13/05/2026","fecha_requerida":"03/07/2026","estado":"Diseño","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"13/05/2026","obs_diseno":"Se realizó una prueba con diseño v1. Se está evaluando el segundo diseño por parte de rectoría.","planchas":"No","formato":"","color":"Full color","material":"Otro","acabado":"Sin acabado","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"Sí","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Julian Ramirez","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-011","nombre":"Volantes de programas académicos Pregrado - Medicina","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"2000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"30/06/2026","estado":"Diseño","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-012","nombre":"Volante programas Pregrado - Bacteriología · Enfermería · Fisioterapia · Fonoaudiología · Nutrición","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Diseño","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"15/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"Sí","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""},{"id":"OT-UM-202606-013","nombre":"Volante programas Pregrado - Odontología · Optometría · Psicología · Terapia Ocupacional · Trabajo Social","tipo":"Volantes","dependencia":"Rectoría - Comunicaciones y Mercadeo","solicitante":"Camilo Robledo","correo":"coordinadordecontenidos@unimetro.edu.co","cantidad":"5000","prioridad":"Normal","fecha_solicitud":"12/06/2026","fecha_requerida":"10/07/2026","estado":"Abierta","responsable":"Julio Rivera","disenador":"Diseño / Comunicaciones","version_diseno":"V1","cliente_aprobo":"No","fecha_aprobacion":"16/05/2026","obs_diseno":"En etapa de diseño y aprobación","planchas":"No","formato":"","color":"Full color","material":"Propalcote","acabado":"Corte","maquina":"Shinohara 52 Bicolor","hay_stock":"No","requiere_compra":"No","fecha_inicio_prod":"","fecha_fin_prod":"","cant_producida":"","entrega_parcial":"","calidad_ok":"No","obs_calidad":"","fecha_entrega":"","recibido_por":"Camilo Robledo","fecha_cierre":"","tiempo_ciclo":"","sla":"Pendiente","obs_cierre":""}];
 
-// ═══════════════════════════════════════════════════════
-//  PIPELINE STAGES
-// ═══════════════════════════════════════════════════════
 const STAGES = [
-  { key: 'Abierta',    label: 'Abierta',         cls: 'stage-abierta' },
-  { key: 'Diseño',     label: 'Diseño',           cls: 'stage-diseno' },
-  { key: 'Compras Planchas', label: 'Compras Planchas', cls: 'stage-planchas' },
-  { key: 'Preprensa',  label: 'Preprensa',        cls: 'stage-preprensa' },
-  { key: 'Producción', label: 'Producción',       cls: 'stage-produccion' },
-  { key: 'Calidad',    label: 'Control Calidad',  cls: 'stage-calidad' },
-  { key: 'Cerrada',    label: 'Entrega / Cerrada', cls: 'stage-cerrada' },
+  { key:'Abierta',          label:'Abierta',          cls:'stage-abierta' },
+  { key:'Diseño',           label:'Diseño',           cls:'stage-diseno' },
+  { key:'Compras Planchas', label:'Compras Planchas', cls:'stage-planchas' },
+  { key:'Preprensa',        label:'Preprensa',        cls:'stage-preprensa' },
+  { key:'Producción',       label:'Producción',       cls:'stage-produccion' },
+  { key:'Calidad',          label:'Control Calidad',  cls:'stage-calidad' },
+  { key:'Cerrada',          label:'Entrega / Cerrada',cls:'stage-cerrada' },
 ];
 
 const STATUS_COLORS = {
-  'Abierta':          { bg: '#fff8e8', text: '#8b6914', border: '#f0d87a' },
-  'Diseño':           { bg: '#e0eef5', text: '#1a6f8c', border: '#9ec8d8' },
-  'Compras Planchas': { bg: '#f2e8f2', text: '#7b3f7b', border: '#cca0cc' },
-  'Preprensa':        { bg: '#fde8e4', text: '#c1440e', border: '#f4bdb4' },
-  'Producción':       { bg: '#e4f4ea', text: '#1d5e30', border: '#a8d8bc' },
-  'Calidad':          { bg: '#fdf0e4', text: '#8b3a1a', border: '#f4ccaa' },
-  'Cerrada':          { bg: '#e4f4ea', text: '#2a7a4b', border: '#a8d8bc' },
+  'Abierta':          {bg:'#fff8e0',text:'#8a5c00',border:'#f0d060'},
+  'Diseño':           {bg:'#ddf0fc',text:'#006da8',border:'#88ccf0'},
+  'Compras Planchas': {bg:'#f2e8f8',text:'#6a3090',border:'#c8a0e0'},
+  'Preprensa':        {bg:'#fde8e4',text:'#c0280a',border:'#f5b5aa'},
+  'Producción':       {bg:'#e2f5eb',text:'#1a6e38',border:'#8ecfaa'},
+  'Calidad':          {bg:'#fdf2e8',text:'#7a3010',border:'#f0c898'},
+  'Cerrada':          {bg:'#ddf0fc',text:'#003F72',border:'#88b8e0'},
 };
 
-// ═══════════════════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════════════════
+let filtered = [...OTS];
+
 function parseDate(s) {
   if (!s) return null;
-  const [d, m, y] = s.split('/');
-  return new Date(+y, +m - 1, +d);
+  const [d,m,y] = s.split('/'); return new Date(+y,+m-1,+d);
 }
-function today() { const t = new Date(); t.setHours(0,0,0,0); return t; }
-function daysDiff(s) {
-  const d = parseDate(s); if (!d) return null;
-  return Math.ceil((d - today()) / 86400000);
-}
+function today() { const t=new Date(); t.setHours(0,0,0,0); return t; }
+function daysDiff(s) { const d=parseDate(s); if(!d) return null; return Math.ceil((d-today())/86400000); }
 function dateClass(s, closed) {
   if (closed) return 'date-ok';
   const diff = daysDiff(s);
-  if (diff === null) return '';
-  if (diff < 0) return 'date-risk';
-  if (diff <= 5) return 'date-warn';
+  if (diff===null) return '';
+  if (diff<0) return 'date-risk';
+  if (diff<=5) return 'date-warn';
   return 'date-ok';
 }
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function getAlerts(ot) {
-  const chips = [];
-  const isClosed = ot.estado === 'Cerrada';
-  if (!isClosed) {
-    const diff = daysDiff(ot.fecha_requerida);
-    if (diff !== null && diff < 0)       chips.push(['chip-red', '⚠ VENCIDA']);
-    else if (diff !== null && diff <= 5) chips.push(['chip-yellow', `⏱ ${diff}d`]);
+  const chips=[], closed=ot.estado==='Cerrada';
+  if (!closed) {
+    const diff=daysDiff(ot.fecha_requerida);
+    if (diff!==null&&diff<0)        chips.push(['chip-red','⚠ VENCIDA']);
+    else if (diff!==null&&diff<=5)  chips.push(['chip-yellow',`⏱ ${diff}d`]);
   }
-  if (ot.requiere_compra === 'Sí' && !isClosed) chips.push(['chip-yellow', '🛒 Compra req.']);
-  if (ot.planchas === 'No' && !isClosed && ['Preprensa','Producción','Calidad'].includes(ot.estado))
-    chips.push(['chip-red', '🚫 Sin planchas']);
-  if (ot.entrega_parcial && ot.entrega_parcial !== '0' && !isClosed)
-    chips.push(['chip-blue', `📦 Parcial: ${ot.entrega_parcial}`]);
-  if (isClosed && ot.sla === 'Sí') chips.push(['chip-green', '✓ SLA OK']);
+  if (ot.requiere_compra==='Sí'&&!closed) chips.push(['chip-yellow','🛒 Compra']);
+  if (ot.planchas==='No'&&!closed&&['Preprensa','Producción','Calidad'].includes(ot.estado))
+    chips.push(['chip-red','🚫 Sin planchas']);
+  if (ot.entrega_parcial&&ot.entrega_parcial!=='0'&&!closed)
+    chips.push(['chip-blue',`📦 Parcial:${ot.entrega_parcial}`]);
+  if (closed&&ot.sla==='Sí') chips.push(['chip-green','✓ SLA OK']);
   return chips;
 }
 
-function depShort(dep) {
-  const map = {
-    'Rectoría - Comunicaciones y Mercadeo': 'Rectoría · Com&Mkt',
-    'Rectoría - Alta consejería': 'Rectoría · Alta Cons.',
-    'Vicerrectoria': 'Vicerrectoría',
-    'Vicerrectoría - Biblioteca': 'Bibl. Unimetro',
-    'Vicerrectoria - Direccion Administrativa': 'Dir. Administrativa',
-  };
-  return map[dep] || dep;
-}
-
-// ═══════════════════════════════════════════════════════
-//  RENDER
-// ═══════════════════════════════════════════════════════
-let filtered = [...OTS];
+const DEP_SHORT = {
+  'Rectoría - Comunicaciones y Mercadeo':'Rectoría · Com&Mkt',
+  'Rectoría - Alta consejería':'Rectoría · Alta Cons.',
+  'Vicerrectoria':'Vicerrectoría',
+  'Vicerrectoría - Biblioteca':'Biblioteca UM',
+  'Vicerrectoria - Direccion Administrativa':'Dir. Administrativa',
+};
 
 function renderKPIs() {
-  const total   = OTS.length;
-  const cerradas = OTS.filter(o => o.estado === 'Cerrada').length;
-  const enCurso  = total - cerradas;
-  const slaOk    = OTS.filter(o => o.sla === 'Sí').length;
-  const vencidas = OTS.filter(o => o.estado !== 'Cerrada' && daysDiff(o.fecha_requerida) !== null && daysDiff(o.fecha_requerida) < 0).length;
-  const totalUnits = OTS.reduce((a,o)=>a+(parseInt(o.cantidad)||0),0);
-
-  document.getElementById('kpiStrip').innerHTML = `
+  const total=OTS.length, cerradas=OTS.filter(o=>o.estado==='Cerrada').length;
+  const enCurso=total-cerradas, slaOk=OTS.filter(o=>o.sla==='Sí').length;
+  const vencidas=OTS.filter(o=>o.estado!=='Cerrada'&&daysDiff(o.fecha_requerida)!==null&&daysDiff(o.fecha_requerida)<0).length;
+  const totalUnits=OTS.reduce((a,o)=>a+(parseInt(o.cantidad)||0),0);
+  document.getElementById('kpiStrip').innerHTML=`
     <div class="kpi-item"><div class="kpi-num">${total}</div><div class="kpi-label">OTs Totales</div></div>
-    <div class="kpi-item"><div class="kpi-num">${enCurso}</div><div class="kpi-label">En Curso</div></div>
-    <div class="kpi-item green"><div class="kpi-num">${cerradas}</div><div class="kpi-label">Cerradas</div></div>
-    <div class="kpi-item gold"><div class="kpi-num">${slaOk}</div><div class="kpi-label">SLA Cumplido</div></div>
-    <div class="kpi-item accent"><div class="kpi-num">${vencidas}</div><div class="kpi-label">Vencidas</div></div>
-    <div class="kpi-item"><div class="kpi-num">${totalUnits.toLocaleString('es')}</div><div class="kpi-label">Unidades solicitadas</div></div>
-  `;
+    <div class="kpi-item kpi-blue"><div class="kpi-num">${enCurso}</div><div class="kpi-label">En Curso</div></div>
+    <div class="kpi-item kpi-green"><div class="kpi-num">${cerradas}</div><div class="kpi-label">Cerradas</div></div>
+    <div class="kpi-item kpi-gold"><div class="kpi-num">${slaOk}</div><div class="kpi-label">SLA Cumplido</div></div>
+    <div class="kpi-item kpi-red"><div class="kpi-num">${vencidas}</div><div class="kpi-label">Vencidas</div></div>
+    <div class="kpi-item"><div class="kpi-num">${totalUnits.toLocaleString('es')}</div><div class="kpi-label">Unidades solicitadas</div></div>`;
 }
 
 function renderFilters() {
-  const deps = [...new Set(OTS.map(o=>o.dependencia))].sort();
-  const states = [...new Set(OTS.map(o=>o.estado))];
-  const depSel = document.getElementById('fDep');
-  const estSel = document.getElementById('fEstado');
-  deps.forEach(d => { const opt = document.createElement('option'); opt.value=d; opt.textContent=d; depSel.appendChild(opt); });
-  states.forEach(s => { const opt = document.createElement('option'); opt.value=s; opt.textContent=s; estSel.appendChild(opt); });
+  const deps=[...new Set(OTS.map(o=>o.dependencia))].sort();
+  const states=[...new Set(OTS.map(o=>o.estado))];
+  const ds=document.getElementById('fDep'), es=document.getElementById('fEstado');
+  deps.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;ds.appendChild(o);});
+  states.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;es.appendChild(o);});
 }
 
 function applyFilters() {
-  const dep    = document.getElementById('fDep').value;
-  const estado = document.getElementById('fEstado').value;
-  const q      = document.getElementById('fSearch').value.toLowerCase().trim();
-  filtered = OTS.filter(o => {
-    if (dep   && o.dependencia !== dep)    return false;
-    if (estado && o.estado !== estado)     return false;
-    if (q && ![o.id, o.nombre, o.solicitante, o.tipo].join(' ').toLowerCase().includes(q)) return false;
+  const dep=document.getElementById('fDep').value;
+  const estado=document.getElementById('fEstado').value;
+  const q=document.getElementById('fSearch').value.toLowerCase().trim();
+  filtered=OTS.filter(o=>{
+    if(dep&&o.dependencia!==dep) return false;
+    if(estado&&o.estado!==estado) return false;
+    if(q&&![o.id,o.nombre,o.solicitante,o.tipo].join(' ').toLowerCase().includes(q)) return false;
     return true;
   });
   renderBoard();
 }
 
 function clearFilters() {
-  document.getElementById('fDep').value = '';
-  document.getElementById('fEstado').value = '';
-  document.getElementById('fSearch').value = '';
+  document.getElementById('fDep').value='';
+  document.getElementById('fEstado').value='';
+  document.getElementById('fSearch').value='';
   applyFilters();
 }
 
 function renderBoard() {
-  const board = document.getElementById('board');
-  board.innerHTML = '';
-
-  STAGES.forEach(stage => {
-    const ots = filtered.filter(o => o.estado === stage.key);
-
-    const col = document.createElement('div');
-    col.className = `stage-col ${stage.cls}`;
-    col.innerHTML = `
+  const board=document.getElementById('board');
+  board.innerHTML='';
+  STAGES.forEach(stage=>{
+    const ots=filtered.filter(o=>o.estado===stage.key);
+    const col=document.createElement('div');
+    col.className=`stage-col ${stage.cls}`;
+    col.innerHTML=`
       <div class="stage-header">
         <span class="stage-name">${stage.label}</span>
         <span class="stage-badge">${ots.length}</span>
       </div>
-      <div class="cards-zone" id="zone-${stage.key.replace(/\s/g,'-')}">
-        ${ots.length === 0 ? '<div class="empty-lane">Sin OTs en este stage</div>' : ''}
+      <div class="cards-zone">
+        ${ots.length===0?'<div class="empty-lane">Sin OTs activas</div>':''}
       </div>`;
     board.appendChild(col);
-
-    const zone = col.querySelector('.cards-zone');
-    ots.forEach(ot => {
-      const alerts = getAlerts(ot);
-      const dCls   = dateClass(ot.fecha_requerida, ot.estado === 'Cerrada');
-      const card   = document.createElement('div');
-      card.className = 'ot-card';
-      card.innerHTML = `
+    const zone=col.querySelector('.cards-zone');
+    ots.forEach(ot=>{
+      const alerts=getAlerts(ot);
+      const dCls=dateClass(ot.fecha_requerida,ot.estado==='Cerrada');
+      const card=document.createElement('div');
+      card.className='ot-card';
+      card.innerHTML=`
         <div class="card-id">${esc(ot.id)}</div>
-        ${alerts.length ? `<div class="card-alerts">${alerts.map(([cls,lbl])=>`<span class="chip ${cls}">${lbl}</span>`).join('')}</div>` : ''}
+        ${alerts.length?`<div class="card-alerts">${alerts.map(([c,l])=>`<span class="chip ${c}">${l}</span>`).join('')}</div>`:''}
         <div class="card-nombre">${esc(ot.nombre)}</div>
         <div class="card-tipo">${esc(ot.tipo)}</div>
-        <div class="card-meta">
-          <span class="card-dep">${depShort(ot.dependencia)}</span>
+        <div class="card-footer">
+          <span class="card-dep">${DEP_SHORT[ot.dependencia]||ot.dependencia}</span>
           <span class="card-qty">${ot.cantidad}</span>
         </div>
-        <div class="card-meta" style="margin-top:5px;">
-          <span style="font-size:9px;color:#aaa;">Entrega:</span>
-          <span class="card-date ${dCls}">${ot.fecha_requerida || '—'}</span>
+        <div class="card-footer" style="margin-top:4px;">
+          <span style="font-size:9px;color:#bbb;">Entrega:</span>
+          <span class="card-date ${dCls}">${ot.fecha_requerida||'—'}</span>
         </div>`;
-      card.onclick = () => openModal(ot);
+      card.onclick=()=>openModal(ot);
       zone.appendChild(card);
     });
   });
-
-  document.getElementById('otCount').textContent = `${filtered.length} de ${OTS.length} OTs`;
+  document.getElementById('otCount').textContent=`${filtered.length} / ${OTS.length} OTs`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  MODAL
-// ═══════════════════════════════════════════════════════
 function openModal(ot) {
-  document.getElementById('mId').textContent = ot.id;
-  document.getElementById('mNombre').textContent = ot.nombre;
-
-  const sc = STATUS_COLORS[ot.estado] || { bg:'#eee', text:'#333', border:'#ccc' };
-  const pill = document.getElementById('mEstadoPill');
-  pill.textContent = ot.estado;
-  pill.style.cssText = `background:${sc.bg};color:${sc.text};border:1px solid ${sc.border};`;
-
-  document.getElementById('mMeta').innerHTML =
-    `${ot.tipo} &nbsp;·&nbsp; ${ot.cantidad} uds &nbsp;·&nbsp; ${ot.solicitante} &nbsp;·&nbsp; ${ot.dependencia}`;
-
-  const alerts = getAlerts(ot);
-  const alertHtml = alerts.length
-    ? `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;">${alerts.map(([cls,lbl])=>`<span class="chip ${cls}" style="font-size:11px;padding:3px 8px;">${lbl}</span>`).join('')}</div>`
-    : '';
-
-  const body = document.getElementById('mBody');
-  body.innerHTML = `
-    ${alertHtml}
-
-    <!-- SOLICITUD -->
+  document.getElementById('mId').textContent=ot.id;
+  document.getElementById('mNombre').textContent=ot.nombre;
+  const sc=STATUS_COLORS[ot.estado]||{bg:'#eee',text:'#333',border:'#ccc'};
+  const pill=document.getElementById('mEstadoPill');
+  pill.textContent=ot.estado;
+  pill.style.cssText=`background:${sc.bg};color:${sc.text};border:1px solid ${sc.border};`;
+  document.getElementById('mMeta').innerHTML=`${ot.tipo} &nbsp;·&nbsp; ${ot.cantidad} uds &nbsp;·&nbsp; ${ot.solicitante}`;
+  const alerts=getAlerts(ot);
+  const ah=alerts.length?`<div style="display:flex;gap:6px;flex-wrap:wrap;">${alerts.map(([c,l])=>`<span class="chip ${c}" style="font-size:11px;padding:3px 8px;">${l}</span>`).join('')}</div>`:'';
+  document.getElementById('mBody').innerHTML=`
+    ${ah}
     <div>
-      <div class="section-head">A · Información de Solicitud</div>
+      <div class="section-head">A · Solicitud</div>
       <div class="grid2">
         <div class="field"><label>Fecha solicitud</label><span class="mono">${ot.fecha_solicitud}</span></div>
-        <div class="field"><label>Fecha requerida</label><span class="mono ${dateClass(ot.fecha_requerida, ot.estado==='Cerrada')}">${ot.fecha_requerida || '—'}</span></div>
+        <div class="field"><label>Fecha requerida</label><span class="mono ${dateClass(ot.fecha_requerida,ot.estado==='Cerrada')}">${ot.fecha_requerida||'—'}</span></div>
+        <div class="field"><label>Dependencia</label><span>${ot.dependencia}</span></div>
         <div class="field"><label>Solicitante</label><span>${ot.solicitante}</span></div>
         <div class="field"><label>Correo</label><span style="font-size:11px;">${ot.correo}</span></div>
         <div class="field"><label>Cantidad</label><span class="mono">${ot.cantidad}</span></div>
@@ -659,89 +528,66 @@ function openModal(ot) {
         <div class="field"><label>Responsable OT</label><span>${ot.responsable}</span></div>
       </div>
     </div>
-
-    <!-- DISEÑO -->
     <div>
       <div class="section-head">B · Diseño</div>
       <div class="grid3">
-        <div class="field"><label>Versión</label><span>${ot.version_diseno || '—'}</span></div>
-        <div class="field"><label>Cliente aprobó</label><span>${ot.cliente_aprobo || '—'}</span></div>
-        <div class="field"><label>Fecha aprobación</label><span class="mono">${ot.fecha_aprobacion || '—'}</span></div>
+        <div class="field"><label>Versión</label><span>${ot.version_diseno||'—'}</span></div>
+        <div class="field"><label>Cliente aprobó</label><span>${ot.cliente_aprobo||'—'}</span></div>
+        <div class="field"><label>Fecha aprobación</label><span class="mono">${ot.fecha_aprobacion||'—'}</span></div>
       </div>
-      <div class="obs-box" style="margin-top:10px;">${esc(ot.obs_diseno)}</div>
+      ${ot.obs_diseno?`<div class="obs-box" style="margin-top:10px;">${esc(ot.obs_diseno)}</div>`:''}
     </div>
-
-    <!-- PREPRENSA -->
     <div>
       <div class="section-head">C · Preprensa & Especificación Técnica</div>
       <div class="grid3">
-        <div class="field"><label>Planchas listas</label><span>${ot.planchas || '—'}</span></div>
-        <div class="field"><label>Formato (cm)</label><span>${ot.formato || '—'}</span></div>
-        <div class="field"><label>Color / Tintas</label><span>${ot.color || '—'}</span></div>
-        <div class="field"><label>Material</label><span>${ot.material || '—'}</span></div>
-        <div class="field"><label>Acabado</label><span>${ot.acabado || '—'}</span></div>
-        <div class="field"><label>Máquina</label><span>${ot.maquina || '—'}</span></div>
+        <div class="field"><label>Planchas listas</label><span>${ot.planchas||'—'}</span></div>
+        <div class="field"><label>Formato (cm)</label><span>${ot.formato||'—'}</span></div>
+        <div class="field"><label>Color / Tintas</label><span>${ot.color||'—'}</span></div>
+        <div class="field"><label>Material</label><span>${ot.material||'—'}</span></div>
+        <div class="field"><label>Acabado</label><span>${ot.acabado||'—'}</span></div>
+        <div class="field"><label>Máquina</label><span>${ot.maquina||'—'}</span></div>
       </div>
     </div>
-
-    <!-- PRODUCCIÓN -->
     <div>
       <div class="section-head">D · Producción</div>
       <div class="grid3">
-        <div class="field"><label>Hay stock</label><span>${ot.hay_stock || '—'}</span></div>
-        <div class="field"><label>Requiere compra</label><span>${ot.requiere_compra || '—'}</span></div>
-        <div class="field"><label>Inicio producción</label><span class="mono">${ot.fecha_inicio_prod || '—'}</span></div>
-        <div class="field"><label>Fin producción</label><span class="mono">${ot.fecha_fin_prod || '—'}</span></div>
-        <div class="field"><label>Cant. producida</label><span class="mono">${ot.cant_producida || '—'}</span></div>
-        <div class="field"><label>Entrega parcial</label><span class="mono">${ot.entrega_parcial || '—'}</span></div>
+        <div class="field"><label>Hay stock</label><span>${ot.hay_stock||'—'}</span></div>
+        <div class="field"><label>Requiere compra</label><span>${ot.requiere_compra||'—'}</span></div>
+        <div class="field"><label>Inicio prod.</label><span class="mono">${ot.fecha_inicio_prod||'—'}</span></div>
+        <div class="field"><label>Fin prod.</label><span class="mono">${ot.fecha_fin_prod||'—'}</span></div>
+        <div class="field"><label>Cant. producida</label><span class="mono">${ot.cant_producida||'—'}</span></div>
+        <div class="field"><label>Entrega parcial</label><span class="mono">${ot.entrega_parcial||'—'}</span></div>
       </div>
     </div>
-
-    <!-- CALIDAD Y CIERRE -->
     <div>
       <div class="section-head">E · Calidad & Cierre</div>
       <div class="grid3">
-        <div class="field"><label>Control calidad OK</label><span>${ot.calidad_ok || '—'}</span></div>
-        <div class="field"><label>Fecha entrega</label><span class="mono">${ot.fecha_entrega || '—'}</span></div>
-        <div class="field"><label>Recibido por</label><span>${ot.recibido_por || '—'}</span></div>
-        <div class="field"><label>Fecha cierre</label><span class="mono">${ot.fecha_cierre || '—'}</span></div>
-        <div class="field"><label>Tiempo ciclo</label><span class="mono">${ot.tiempo_ciclo ? ot.tiempo_ciclo + ' días' : '—'}</span></div>
-        <div class="field"><label>SLA cumplido</label><span>${ot.sla || '—'}</span></div>
+        <div class="field"><label>Calidad OK</label><span>${ot.calidad_ok||'—'}</span></div>
+        <div class="field"><label>Fecha entrega</label><span class="mono">${ot.fecha_entrega||'—'}</span></div>
+        <div class="field"><label>Recibido por</label><span>${ot.recibido_por||'—'}</span></div>
+        <div class="field"><label>Fecha cierre</label><span class="mono">${ot.fecha_cierre||'—'}</span></div>
+        <div class="field"><label>Tiempo ciclo</label><span class="mono">${ot.tiempo_ciclo?ot.tiempo_ciclo+' días':'—'}</span></div>
+        <div class="field"><label>SLA cumplido</label><span>${ot.sla||'—'}</span></div>
       </div>
-      ${ot.obs_calidad ? `<div class="obs-box" style="margin-top:10px;">${esc(ot.obs_calidad)}</div>` : ''}
-      ${ot.obs_cierre  ? `<div class="obs-box" style="margin-top:8px;">${esc(ot.obs_cierre)}</div>`  : ''}
-    </div>
-  `;
-
+      ${ot.obs_calidad?`<div class="obs-box" style="margin-top:10px;">${esc(ot.obs_calidad)}</div>`:''}
+      ${ot.obs_cierre?`<div class="obs-box" style="margin-top:8px;border-left-color:#1e8c4a;">${esc(ot.obs_cierre)}</div>`:''}
+    </div>`;
   document.getElementById('modalOverlay').classList.add('open');
 }
 
-function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
-}
-function closeModalDirect() {
-  document.getElementById('modalOverlay').classList.remove('open');
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+function closeModal(e) { if(e.target===document.getElementById('modalOverlay')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModalDirect(); });
 
-// ═══════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════
 function init() {
-  // Last update timestamp
-  const now = new Date();
-  document.getElementById('lastUpdate').textContent =
-    `Act. ${now.toLocaleDateString('es-CO',{day:'2-digit',month:'short'})} ${now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'})}`;
-
-  renderKPIs();
-  renderFilters();
-  applyFilters();
-
-  document.getElementById('fDep').addEventListener('change', applyFilters);
-  document.getElementById('fEstado').addEventListener('change', applyFilters);
-  document.getElementById('fSearch').addEventListener('input', applyFilters);
+  const now=new Date();
+  document.getElementById('lastUpdate').textContent=
+    `${now.toLocaleDateString('es-CO',{day:'2-digit',month:'short'})} ${now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'})}`;
+  renderKPIs(); renderFilters(); applyFilters();
+  document.getElementById('fDep').addEventListener('change',applyFilters);
+  document.getElementById('fEstado').addEventListener('change',applyFilters);
+  document.getElementById('fSearch').addEventListener('input',applyFilters);
 }
-
 init();
 </script>
 </body>
