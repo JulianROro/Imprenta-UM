@@ -233,6 +233,39 @@
   .tl-note { font-size:10px; color:#9aa6b2; margin-top:12px; font-style:italic; }
   @media (max-width:640px){ .tl-body{padding:12px} }
 
+
+  /* ===== Exportar Cronograma a PDF (impresión nativa) ===== */
+  .tl-actions { display:flex; align-items:center; gap:8px; }
+  .tl-pdf-btn { font-size:10.5px; font-weight:700; background:transparent; color:var(--um-blue); border:1px solid var(--um-blue); border-radius:3px; padding:6px 12px; cursor:pointer; white-space:nowrap; transition:background .2s,color .2s; }
+  .tl-pdf-btn:hover { background:var(--um-blue); color:var(--um-navy); }
+  .tl-print-head { display:none; }
+
+  @media print {
+    @page { size: A4 landscape; margin: 10mm; }
+    html, body { background:#fff !important; }
+    /* Ocultar todo salvo el cronograma */
+    body > *:not(.tl-overlay) { display:none !important; }
+    .tl-overlay { display:block !important; position:static !important; inset:auto !important;
+                  background:none !important; padding:0 !important; z-index:auto !important; }
+    .tl-modal { max-width:100% !important; width:100% !important; max-height:none !important;
+                box-shadow:none !important; border-radius:0 !important; border-top:3px solid var(--um-blue) !important; }
+    .tl-body { overflow:visible !important; padding:10px 0 0 !important; }
+    .tl-grid { min-width:0 !important; width:100% !important; }
+    .tl-close, .tl-pdf-btn { display:none !important; }
+    /* Encabezado impreso con marca institucional */
+    .tl-print-head { display:block !important; font-size:9px; color:#5a6b7b; margin-bottom:6px; }
+    .tl-lane { min-height:26px !important; page-break-inside:avoid; break-inside:avoid; }
+    .tl-lane-label { font-size:9px !important; }
+    .tl-lane-label .tl-dep { font-size:7.5px !important; }
+    .tl-bar-label { font-size:7.5px !important; }
+    .tl-mcell { font-size:9px !important; }
+    .tl-legend { font-size:9px !important; page-break-inside:avoid; }
+    .tl-note { font-size:8px !important; }
+    /* Forzar impresión de colores de las barras */
+    .tl-bar-group, .tl-seg, .tl-leg-swatch, .tl-mcell, .tl-today, .tl-modal {
+      -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -350,10 +383,11 @@
         <h2>Cronograma · Vista Timeline</h2>
         <div class="tl-sub">Trabajos de la Imprenta · desde 1 de mayo 2026</div>
       </div>
-      <button class="tl-close" onclick="closeTimelineDirect()">✕</button>
+      <div class="tl-actions"><button class="tl-pdf-btn" onclick="printTimeline()" title="Descargar o imprimir el cronograma en PDF">⤓ Descargar PDF</button><button class="tl-close" onclick="closeTimelineDirect()">✕</button></div>
     </div>
     <div class="tl-body">
       <div class="tl-grid">
+        <div class="tl-print-head" id="tlPrintHead"></div>
         <div class="tl-months" id="tlMonths"></div>
         <div style="position:relative">
           <div id="tlLanes"></div>
@@ -761,6 +795,15 @@ function buildTimeline(){
   leg+=`<div class="tl-leg-item"><span class="tl-leg-swatch active-demo"></span>En producción</div>`;
   leg+=`<div class="tl-leg-item"><span class="tl-leg-swatch hatch"></span>✓ Trabajo cumplido</div>`;
   document.getElementById('tlLegend').innerHTML=leg;
+}
+function printTimeline(){
+  const el=document.getElementById('tlPrintHead');
+  if(el){
+    const now=new Date();
+    const f=now.toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'});
+    el.textContent='Imprenta Universidad Metropolitana · Cronograma de trabajos · Generado el '+f+' · Fuente: Master_Pedido_OT_Imprenta_UM_v1.xlsx';
+  }
+  window.print();
 }
 function openTimeline(){ buildTimeline(); document.getElementById('tlOverlay').classList.add('open'); }
 function closeTimeline(e){ if(!e||e.target===document.getElementById('tlOverlay')) document.getElementById('tlOverlay').classList.remove('open'); }
