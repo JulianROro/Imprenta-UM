@@ -477,14 +477,21 @@ function renderKPIs(){
   const total=OTS.length, cerradas=OTS.filter(o=>o.estado_real==='Cerrada').length;
   const enCurso=total-cerradas, slaOk=OTS.filter(o=>o.sla==='Sí').length;
   const vencidas=OTS.filter(o=>o.estado_real!=='Cerrada'&&daysDiff(o.fecha_requerida)!==null&&daysDiff(o.fecha_requerida)<0).length;
-  const totalUnits=OTS.reduce((a,o)=>a+(parseInt(o.cantidad)||0),0);
+  // Unidades discriminadas: producidas (cant_producida) vs. pendientes (cantidad - producida, sin negativos por OT)
+  let unidadesProducidas=0, unidadesPendientes=0;
+  OTS.forEach(o=>{
+    const cant=parseInt(o.cantidad)||0, prod=parseInt(o.cant_producida)||0;
+    unidadesProducidas+=prod;
+    unidadesPendientes+=Math.max(0, cant-prod);
+  });
   document.getElementById('kpiStrip').innerHTML=
     '<div class="kpi-item"><div class="kpi-num">'+total+'</div><div class="kpi-label">OTs Totales</div></div>'+
     '<div class="kpi-item kpi-blue"><div class="kpi-num">'+enCurso+'</div><div class="kpi-label">En Curso</div></div>'+
     '<div class="kpi-item kpi-green"><div class="kpi-num">'+cerradas+'</div><div class="kpi-label">Cerradas</div></div>'+
     '<div class="kpi-item kpi-gold"><div class="kpi-num">'+slaOk+'</div><div class="kpi-label">SLA Cumplido</div></div>'+
     '<div class="kpi-item kpi-red"><div class="kpi-num">'+vencidas+'</div><div class="kpi-label">Vencidas</div></div>'+
-    '<div class="kpi-item"><div class="kpi-num">'+totalUnits.toLocaleString('es')+'</div><div class="kpi-label">Unidades</div></div>';
+    '<div class="kpi-item kpi-green"><div class="kpi-num">'+unidadesProducidas.toLocaleString('es')+'</div><div class="kpi-label">Unidades Producidas</div></div>'+
+    '<div class="kpi-item"><div class="kpi-num">'+unidadesPendientes.toLocaleString('es')+'</div><div class="kpi-label">Unidades Pendientes</div></div>';
 }
 
 function renderFilters(){
